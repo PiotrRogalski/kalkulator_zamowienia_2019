@@ -14,8 +14,11 @@ class CreateAdditionalServicesTable extends Migration
     public function up()
     {
         Schema::create('additional_services', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->Increments('id');
+            $table->unsignedInteger('glass_pane_id');
+            $table->unsignedInteger('price');
+            $table->text('description')->nullable();
+            $table->softDeletes();
         });
     }
 

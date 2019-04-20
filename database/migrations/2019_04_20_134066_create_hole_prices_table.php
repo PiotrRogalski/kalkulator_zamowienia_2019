@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMaterialTypesTable extends Migration
+class CreateHolePricesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateMaterialTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('material_types', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+        Schema::create('hole_prices', function (Blueprint $table) {
+            $table->Increments('id');
+            $table->unsignedSmallInteger('diameter_from');
+            $table->unsignedSmallInteger('diameter_to');
+            $table->unsignedSmallInteger('price');
         });
     }
 
@@ -26,6 +28,6 @@ class CreateMaterialTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('material_types');
+        Schema::dropIfExists('hole_prices');
     }
 }

@@ -14,15 +14,19 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->Increments('id');
             $table->string('order_system_number');
             $table->unsignedInteger('client_id');
-            $table->unsignedInteger('advance');
-            $table->unsignedSmallInteger('distance');
-            $table->unsignedTinyInteger('percentage_discount');
-            $table->unsignedBigInteger('total_penny_order_sum');
+            $table->unsignedInteger('advance')->nullable();
+            $table->unsignedSmallInteger('distance')->nullable();
+            $table->unsignedTinyInteger('percentage_discount')->nullable();
+            $table->unsignedBigInteger('total_penny_order_sum')->nullable();
             $table->date('created_at');
             $table->date('deadline_at');
+
+            $table->foreign('client_id')
+                  ->references('id')->on('clients')
+                  ->onDelete('cascade');
         });
     }
 

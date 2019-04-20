@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class MaterialType extends Controller
+class HoleController extends Controller
 {
     //
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCutModelsTable extends Migration
+class CreateGlassModelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateCutModelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cut_models', function (Blueprint $table) {
+        Schema::create('glass_models', function (Blueprint $table) {
             $table->Increments('id');
             $table->string('name');
             $table->unsignedInteger('material_id')->nullable();
             $table->unsignedInteger('material_type_id')->nullable();
-            $table->unsignedInteger('thickness_from')->nullable();
-            $table->unsignedInteger('thickness_to')->nullable();
-            $table->string('unit')->default('szt');
+            $table->unsignedInteger('thickness')->nullable();
+            $table->string('unit')->default('m2');
             $table->unsignedInteger('price');
             $table->softDeletes();
         });
@@ -33,6 +32,6 @@ class CreateCutModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cut_models');
+        Schema::dropIfExists('glass_models');
     }
 }

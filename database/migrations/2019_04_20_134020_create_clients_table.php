@@ -14,11 +14,14 @@ class CreateClientsTable extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->Increments('id');
             $table->string('full_name');
-            $table->string('phone_number');
-            $table->unsignedInteger('place_of_delivery_id');
-            $table->unsignedTinyInteger('default_distance');
+            $table->string('phone_number')->nullable();
+            $table->unsignedInteger('place_of_delivery_id')->nullable();
+            $table->unsignedTinyInteger('default_distance')->nullable();
+
+            $table->foreign('place_of_delivery_id')
+                  ->references('id')->on('place_of_deliveries');
         });
     }
 

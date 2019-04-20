@@ -14,8 +14,12 @@ class CreateHolesTable extends Migration
     public function up()
     {
         Schema::create('holes', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->Increments('id');
+            $table->unsignedInteger('glass_pane_id');
+            $table->unsignedInteger('number')->default('1');
+            $table->string('unit')->default('szt');
+            $table->unsignedInteger('price');
+            $table->softDeletes();
         });
     }
 

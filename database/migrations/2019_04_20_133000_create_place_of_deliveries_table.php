@@ -14,8 +14,9 @@ class CreatePlaceOfDeliveriesTable extends Migration
     public function up()
     {
         Schema::create('place_of_deliveries', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->Increments('id');
+            $table->string('name');
+            $table->unsignedSmallInteger('distance')->default('10');
         });
     }
 
