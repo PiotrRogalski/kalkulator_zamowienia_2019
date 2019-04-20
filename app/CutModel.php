@@ -9,4 +9,7 @@ class CutModel extends Model
 {
     public $timestamps = false;
     use SoftDeletes;
+    protected $guarded = ['id'];
+    protected $hidden = ['id', 'material_id', 'material_type_id'];
+
 }

@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PlaceOfDelivery extends Model
 {
     public $timestamps = false;
+    protected $guarded = ['id'];
+    protected $hidden = ['id'];
 
 }

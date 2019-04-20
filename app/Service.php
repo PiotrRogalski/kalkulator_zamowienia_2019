@@ -9,4 +9,7 @@ class Service extends Model
 {
     public $timestamps = false;
     use SoftDeletes;
+    protected $guarded = ['id'];
+    protected $hidden = ['id', 'glass_pane_id'];
+
 }
