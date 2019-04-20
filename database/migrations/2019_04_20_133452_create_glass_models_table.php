@@ -22,6 +22,13 @@ class CreateGlassModelsTable extends Migration
             $table->string('unit')->default('m2');
             $table->unsignedInteger('price');
             $table->softDeletes();
+
+            $table->foreign('material_id')
+                  ->references('id')->on('materials')
+                  ->onDelete('cascade');
+            $table->foreign('material_type_id')
+                  ->references('id')->on('material_types')
+                  ->onDelete('cascade');
         });
     }
 

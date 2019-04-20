@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHolesTable extends Migration
+class CreateAdditionalServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateHolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('holes', function (Blueprint $table) {
+        Schema::create('additional_services', function (Blueprint $table) {
             $table->Increments('id');
             $table->unsignedInteger('glass_pane_id');
-            $table->unsignedInteger('number')->default('1');
-            $table->string('unit')->default('szt');
             $table->unsignedInteger('price');
+            $table->text('description')->nullable();
             $table->softDeletes();
+
+            $table->foreign('glass_pane_id')
+                  ->references('id')->on('glass_panes')
+                  ->onDelete('cascade');
         });
     }
 
@@ -30,6 +33,6 @@ class CreateHolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('holes');
+        Schema::dropIfExists('additional_services');
     }
 }
