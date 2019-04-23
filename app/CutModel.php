@@ -10,6 +10,13 @@ class CutModel extends Model
     public $timestamps = false;
     use SoftDeletes;
     protected $guarded = ['id'];
-    protected $hidden = ['id', 'material_id', 'material_type_id'];
+    protected $hidden = ['id', 'material_id', 'material_type_id', 'deleted_at'];
 
+    public function material() {
+        return $this->hasOne(Material::class,'id', 'material_id');
+    }
+
+    public function materialType() {
+        return $this->hasOne(MaterialType::class, 'id','material_type_id');
+    }
 }

@@ -9,25 +9,31 @@ use App\Order;
 class OrderController extends Controller
 {
     public function all() {
-        return Order::with('clients')->get();
-//        return Order::all();
+        return Order::with(['clients','glassPanes'])->get();
     }
 
-    public function single(Order $id) {
-        return Order::findOrFail($id);
+    public function single(Order $order, $id) {
+        return $order->findOrFail($id)->with('clients')->withGlassPanes()->first();
     }
 
     public function store(OrderRequestValidation $request) {
-        Order::create($request->all());
-        return response('CREATED', Response::HTTP_CREATED);
+        if (Order::create($request->all())) {
+            return response('CREATED', Response::HTTP_CREATED);
+        }
+        return response('Error - bad request', Response::HTTP_BAD_REQUEST);
     }
 
-    public function update(Order $order, OrderRequestValidation $request) {
-        $order->update($request->all());
-        return response('OK', Response::HTTP_OK);
+    public function update(Order $id, OrderRequestValidation $request) {
+        if ($id->update($request->all())) {
+            return response('OK', Response::HTTP_OK);
+        }
+        return response('Error - bad request', Response::HTTP_BAD_REQUEST);
     }
 
     public function destroy(Order $id) {
-        return Order::destroy($id);
+        if ($id->delete()) {
+            return response('OK - force deleted', Response::HTTP_OK);
+        }
+        return response('Error - bad request', Response::HTTP_BAD_REQUEST);
     }
 }

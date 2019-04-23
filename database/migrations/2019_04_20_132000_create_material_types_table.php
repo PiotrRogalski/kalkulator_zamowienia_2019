@@ -16,6 +16,7 @@ class CreateMaterialTypesTable extends Migration
         Schema::create('material_types', function (Blueprint $table) {
             $table->Increments('id');
             $table->string('name');
+            $table->softDeletes();
         });
     }
 

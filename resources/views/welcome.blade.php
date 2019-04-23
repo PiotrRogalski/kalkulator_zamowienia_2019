@@ -11,6 +11,7 @@
     </head>
     <body>
         {{--kontrola błędów - flash message--}}
+        <?= $errors ?>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -20,6 +21,10 @@
                 </ul>
             </div>
         @endif
+
+        @error ('client_id')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <div id="app">
             <example-component>hello</example-component>

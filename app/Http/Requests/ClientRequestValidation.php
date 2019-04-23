@@ -13,7 +13,7 @@ class ClientRequestValidation extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class ClientRequestValidation extends FormRequest
     public function rules()
     {
         return [
-            //
+            'full_name' => 'required|string',
+            'phone_number' => 'required|string',
+            'place_of_delivery_id' => 'required|numeric|min:1|exists:place_of_deliveries,id',
+            'default_distance' => 'numeric',
         ];
     }
 }

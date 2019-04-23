@@ -10,9 +10,11 @@ class Client extends Model
     protected $guarded = ['id'];
     protected $hidden = ['id', 'place_of_delivery_id'];
 
+    public function placeOfDelivery() {
+        return $this->hasOne(PlaceOfDelivery::class, 'id','place_of_delivery_id');
+    }
 
-//    public function task()
-//    {
-//        return $this->belongsTo(Task::class);
-//    }
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
 }

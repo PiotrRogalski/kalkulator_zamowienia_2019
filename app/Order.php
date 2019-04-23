@@ -13,4 +13,21 @@ class Order extends Model
     public function clients() {
         return $this->belongsTo(Client::class, 'client_id');
     }
+
+    public function glassPanes() {
+        return $this->hasMany(GlassPane::class);
+    }
+
+    public function scopeWithGlassPanes($query)
+    {
+        $query->with([
+            'glassPanes',
+            'glassPanes.cutModel',
+            'glassPanes.cutModel.material',
+            'glassPanes.cutModel.materialType',
+            'glassPanes.glassModel',
+            'glassPanes.glassModel.material',
+            'glassPanes.glassModel.materialType',
+        ]);
+    }
 }

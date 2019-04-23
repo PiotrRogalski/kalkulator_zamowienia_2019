@@ -21,6 +21,7 @@ class CreateGlassPanesTable extends Migration
             $table->unsignedInteger('cut_model_id');
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('price');
+            $table->unsignedSmallInteger('quantity');
 
             $table->foreign('order_id')
                   ->references('id')->on('orders')
