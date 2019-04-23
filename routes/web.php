@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('home');});
+Route::get('/new-task', function () {return view('home');});
+Route::get('/show-task/{id}', function () {return view('home');});
+Route::get('/all-tasks', function () {return view('home');});
+Route::get('/settings', function () {return view('home');});
+
 
 Auth::routes();
 

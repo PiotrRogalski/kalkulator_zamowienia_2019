@@ -33,7 +33,19 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="/new-task">Nowe zadanie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/show-task/1">Pokaż zadanie 1</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/all-tasks">Wszystkie zadania</a>
+                        </li>
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="/settings">Ustawienia</a>
+                            </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->

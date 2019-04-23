@@ -117,7 +117,6 @@ Route::group([
         Route::post('store', 'ConfigController@store');
         Route::patch('update/{id}', 'ConfigController@update');
     });
-
 });
 
 

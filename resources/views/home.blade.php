@@ -25,7 +25,12 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <ul>
+                        <li><a href="/new-task">Nowe zadanie</a></li>
+                        <li><a href="/show-task/1">Pokaż zadanie 1</a></li>
+                        <li><a href="/all-tasks">Wszystkie zadania</a></li>
+                        <li><a href="/settings">Ustawienia</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
