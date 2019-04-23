@@ -24,7 +24,9 @@ class HolePriceRequestValidation extends FormRequest
     public function rules()
     {
         return [
-            //
+            'diameter_from' => 'required|numeric|min:0',
+            'diameter_to' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0',
         ];
     }
 }

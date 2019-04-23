@@ -77,6 +77,47 @@ Route::group([
         Route::delete('destroy/{id}', 'MaterialTypeController@destroy');
     });
 
+    Route::group(['prefix' => 'holes'], function () {
+        Route::get('all', 'HoleController@all');
+        Route::post('store', 'HoleController@store');
+        Route::patch('update/{id}', 'HoleController@update');
+        Route::delete('destroy/{id}', 'HoleController@destroy');
+    });
+
+    Route::group(['prefix' => 'services'], function () {
+        Route::get('all', 'ServiceController@all');
+        Route::post('store', 'ServiceController@store');
+        Route::patch('update/{id}', 'ServiceController@update');
+        Route::delete('destroy/{id}', 'ServiceController@destroy');
+    });
+
+    Route::group(['prefix' => 'additional-services'], function () {
+        Route::get('all', 'AdditionalServiceController@all');
+        Route::post('store', 'AdditionalServiceController@store');
+        Route::patch('update/{id}', 'AdditionalServiceController@update');
+        Route::delete('destroy/{id}', 'AdditionalServiceController@destroy');
+    });
+
+    Route::group(['prefix' => 'places-of-deliveries'], function () {
+        Route::get('all', 'PlaceOfDeliveryController@all');
+        Route::post('store', 'PlaceOfDeliveryController@store');
+        Route::patch('update/{id}', 'PlaceOfDeliveryController@update');
+        Route::delete('destroy/{id}', 'PlaceOfDeliveryController@destroy');
+    });
+
+    Route::group(['prefix' => 'hole-prices'], function () {
+        Route::get('all', 'HolePriceController@all');
+        Route::post('store', 'HolePriceController@store');
+        Route::patch('update/{id}', 'HolePriceController@update');
+        Route::delete('destroy/{id}', 'HolePriceController@destroy');
+    });
+
+    Route::group(['prefix' => 'configs'], function () {
+        Route::get('all', 'ConfigController@all');
+        Route::post('store', 'ConfigController@store');
+        Route::patch('update/{id}', 'ConfigController@update');
+    });
+
 });
 
 

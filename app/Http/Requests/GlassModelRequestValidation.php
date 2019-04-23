@@ -24,7 +24,12 @@ class GlassModelRequestValidation extends FormRequest
     public function rules()
     {
         return [
-            //
+            'material_type_id' => 'bail|required|numeric|min:1|exists:material_types,id',
+            'material_id' => 'bail|required|numeric|min:1|exists:materials,id',
+            'name' => 'required|string',
+            'thickness' => 'numeric|min:1',
+            'unit' => 'required|string',
+            'price' => 'required|numeric|min:0',
         ];
     }
 }

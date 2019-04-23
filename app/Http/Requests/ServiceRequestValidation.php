@@ -24,7 +24,10 @@ class ServiceRequestValidation extends FormRequest
     public function rules()
     {
         return [
-            //
+            'glass_pane_id' => 'bail|required|numeric|min:1|exists:glass_panes,id',
+            'name' => 'required|string',
+            'unit' => 'required|string',
+            'price' => 'required|numeric|min:0',
         ];
     }
 }

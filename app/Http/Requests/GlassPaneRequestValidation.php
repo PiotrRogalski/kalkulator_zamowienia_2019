@@ -24,7 +24,12 @@ class GlassPaneRequestValidation extends FormRequest
     public function rules()
     {
         return [
-            //
+            'glass_pane_id' => 'bail|required|numeric|min:1|exists:glass_panes,id',
+            'cut_model_id' => 'bail|required|numeric|min:1|exists:cut_models,id',
+            'order_id' => 'bail|required|numeric|min:1|exists:orders,id',
+            'width' => 'required|numeric|min:0',
+            'height' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0',
         ];
     }
 }

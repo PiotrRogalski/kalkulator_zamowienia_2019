@@ -24,7 +24,8 @@ class PlaceOfDeliveryRequestValidation extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+            'distance' => 'numeric|min:0',
         ];
     }
 }

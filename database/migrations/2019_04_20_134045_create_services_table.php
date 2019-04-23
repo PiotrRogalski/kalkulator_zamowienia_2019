@@ -19,6 +19,7 @@ class CreateServicesTable extends Migration
             $table->string('name');
             $table->string('unit')->default('szt');
             $table->unsignedInteger('price')->default('0');
+            $table->unsignedSmallInteger('number')->nullable();
             $table->softDeletes();
 
             $table->foreign('glass_pane_id')

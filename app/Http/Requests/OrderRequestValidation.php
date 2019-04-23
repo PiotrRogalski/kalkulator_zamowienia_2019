@@ -25,7 +25,7 @@ class OrderRequestValidation extends FormRequest
     {
         return [
             'order_system_number' => 'required',
-            'client_id' => 'required|exists:clients,id',
+            'client_id' => 'bail|required|numeric|min:1|exists:clients,id',
             'advance' => 'numeric|min:0',
             'distance' => 'numeric|min:0|max:1000',
             'percentage_discount' => 'numeric|min:0|max:100',

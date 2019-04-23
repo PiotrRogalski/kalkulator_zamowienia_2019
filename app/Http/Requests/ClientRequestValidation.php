@@ -24,10 +24,10 @@ class ClientRequestValidation extends FormRequest
     public function rules()
     {
         return [
+            'place_of_delivery_id' => 'bail|required|numeric|min:1|exists:place_of_deliveries,id',
             'full_name' => 'required|string',
-            'phone_number' => 'required|string',
-            'place_of_delivery_id' => 'required|numeric|min:1|exists:place_of_deliveries,id',
-            'default_distance' => 'numeric',
+            'phone_number' => 'string',
+            'default_distance' => 'numeric|min:0',
         ];
     }
 }

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\MaterialTypeRequestValidation;
 use Symfony\Component\HttpFoundation\Response;
 use App\MaterialType;
-
 
 class MaterialTypeController extends Controller
 {

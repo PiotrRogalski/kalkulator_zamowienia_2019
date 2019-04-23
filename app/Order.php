@@ -28,6 +28,9 @@ class Order extends Model
             'glassPanes.glassModel',
             'glassPanes.glassModel.material',
             'glassPanes.glassModel.materialType',
+            'glassPanes.holes',
+            'glassPanes.services',
+            'glassPanes.additionalService',
         ]);
     }
 }

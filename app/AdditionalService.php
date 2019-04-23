@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AdditionalService extends Model
 {
+    public $timestamps = false;
     use SoftDeletes;
     protected $guarded = ['id'];
     protected $hidden = ['id', 'glass_pane_id', 'deleted_at'];

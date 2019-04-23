@@ -24,7 +24,15 @@ class ConfigRequestValidation extends FormRequest
     public function rules()
     {
         return [
-            //
+            'distance_km_price' => 'numeric|min:0',
+            'free_delivery_from_price' => 'numeric|min:0',
+            'free_delivery_distance' => 'numeric|min:0',
+            'company_metadata' => 'string',
+            'last_company_metadata' => 'string',
+            'standard_order_time' => 'numeric|min:0',
+            'time_of_order_limitation' => 'numeric|min:0',
+            'printing_unit_glass_dimension' => 'string',
+            'unit_glass_dimension' => 'string',
         ];
     }
 }

@@ -24,7 +24,7 @@ class MaterialRequestValidation extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
         ];
     }
 }

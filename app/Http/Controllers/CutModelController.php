@@ -16,7 +16,6 @@ class CutModelController extends Controller
 
     public function single(CutModel $model, $id) {
         return $model->findOrFail($id)->with(['material','materialType'])->first();
-
     }
 
     public function store(CutModelRequestValidation $request) {

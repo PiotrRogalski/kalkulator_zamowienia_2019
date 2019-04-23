@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\GlassPaneRequestValidation;
 use Symfony\Component\HttpFoundation\Response;
 use App\GlassPane;
@@ -15,7 +14,13 @@ class GlassPaneController extends Controller
     }
 
     public function single(GlassPane $model, $id) {
-        return $model->findOrFail($id)->with(['glassModel','cutModel'])->first();
+        return $model->findOrFail($id)->with([
+            'glassModel',
+            'cutModel',
+            'additionalService',
+            'services',
+            'holes'
+        ])->first();
     }
 
     public function store(GlassPaneRequestValidation $request) {

@@ -24,9 +24,9 @@ class AdditionalServiceRequestValidation extends FormRequest
     public function rules()
     {
         return [
-        //example
-//            'title' => 'bail|required|unique:posts|max:255',
-//            'body' => 'required',
+            'glass_pane_id' => 'bail|required|numeric|min:1|exists:glass_panes,id',
+            'price' => 'required|numeric|min:0',
+            'description' => 'string',
         ];
     }
 }

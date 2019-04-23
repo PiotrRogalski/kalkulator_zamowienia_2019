@@ -17,6 +17,7 @@ class CreateHolesTable extends Migration
             $table->Increments('id');
             $table->unsignedInteger('glass_pane_id');
             $table->unsignedInteger('number')->default('1');
+            $table->unsignedInteger('diameter')->default('1');
             $table->string('unit')->default('szt');
             $table->unsignedInteger('price');
             $table->softDeletes();
