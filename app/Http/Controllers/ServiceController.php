@@ -9,7 +9,7 @@ use App\Service;
 class ServiceController extends Controller
 {
     public function all() {
-        return Service::all();
+        return Service::with('serviceList')->get();
     }
 
     public function store(ServiceRequestValidation $request) {
