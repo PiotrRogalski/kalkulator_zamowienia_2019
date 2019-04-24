@@ -19,6 +19,7 @@ class CreateGlassModelsTable extends Migration
             $table->unsignedInteger('material_id')->nullable();
             $table->unsignedInteger('material_type_id')->nullable();
             $table->unsignedInteger('thickness')->nullable();
+            $table->string('glass_mark')->nullable();
             $table->string('unit')->default('m2');
             $table->unsignedInteger('price');
             $table->softDeletes();

@@ -91,6 +91,13 @@ Route::group([
         Route::delete('destroy/{id}', 'ServiceController@destroy');
     });
 
+    Route::group(['prefix' => 'services-list'], function () {
+        Route::get('all', 'ServiceListController@all');
+        Route::post('store', 'ServiceListController@store');
+        Route::patch('update/{id}', 'ServiceListController@update');
+        Route::delete('destroy/{id}', 'ServiceListController@destroy');
+    });
+
     Route::group(['prefix' => 'additional-services'], function () {
         Route::get('all', 'AdditionalServiceController@all');
         Route::post('store', 'AdditionalServiceController@store');

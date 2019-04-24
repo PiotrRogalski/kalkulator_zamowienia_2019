@@ -12,10 +12,10 @@
 */
 
 Route::get('/', function () {return view('home');});
-Route::get('/new-task', function () {return view('home');});
-Route::get('/show-task/{id}', function () {return view('home');});
-Route::get('/all-tasks', function () {return view('home');});
-Route::get('/settings', function () {return view('home');});
+Route::get('/new-task', function () {return view('newTask');});
+Route::get('/show-task/{id}', function () {return view('showTask');});
+Route::get('/all-tasks', function () {return view('allTasks');});
+Route::get('/settings', function () {return view('settings');});
 
 
 Auth::routes();

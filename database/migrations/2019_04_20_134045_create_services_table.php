@@ -16,15 +16,15 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->Increments('id');
             $table->unsignedInteger('glass_pane_id');
-            $table->string('name');
-            $table->string('unit')->default('szt');
-            $table->unsignedInteger('price')->default('0');
-            $table->unsignedSmallInteger('number')->nullable();
-            $table->softDeletes();
+            $table->unsignedInteger('service_list_id');
+            $table->unsignedSmallInteger('quantity')->nullable();
 
             $table->foreign('glass_pane_id')
                   ->references('id')->on('glass_panes')
                   ->onDelete('cascade');
+
+            $table->foreign('service_list_id')
+                  ->references('id')->on('service_lists');
         });
     }
 
