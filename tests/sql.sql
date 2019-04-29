@@ -50,7 +50,7 @@ INSERT INTO `service_lists`(`name`, `unit`, `price`) VALUES
 ('zabezpieczenie piaskowania','m2','5000'),
 ('drukowanie na szkle','m2','33000'),
 ('laminowanie 4 warstwy foli','m2','31100'),
-('aminowanie 3 warstwy foli','m2','27000'),
+('laminowanie 3 warstwy foli','m2','27000'),
 ('foliowanie','m2','5000');
 
 

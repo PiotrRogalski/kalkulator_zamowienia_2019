@@ -2,8 +2,10 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import Vue from 'vue';
-// import User from './helpers/User';
-import Vuetify from 'vuetify'
+import Vuetify from 'vuetify';
+import nd2 from './functions/helpers';
+window.nd2 = nd2;
+
 // import router from './router/router.js';
 // npm install material-design-icons-iconfont -D
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader

@@ -10,6 +10,7 @@ class MaterialType extends Model
     use SoftDeletes;
     public $timestamps = false;
     protected $guarded = ['id'];
-    protected $hidden = ['id', 'deleted_at'];
+    protected $hidden = [ 'deleted_at'];
+//    protected $hidden = ['id', 'deleted_at'];
 
 }

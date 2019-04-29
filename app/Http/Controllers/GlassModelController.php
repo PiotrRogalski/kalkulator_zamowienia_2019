@@ -12,6 +12,7 @@ class GlassModelController extends Controller
 {
     public function all() {
         return GlassModel::all();
+//        return GlassModel::with(['material', 'materialType',])->get();
     }
 
     public function single(GlassModel $model, $id) {
