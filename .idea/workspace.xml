@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f5d7c06-79b2-432a-bdd9-0dc59282bebb" name="Default Changelist" comment="created new glass pane component - half work done">
+    <list default="true" id="5f5d7c06-79b2-432a-bdd9-0dc59282bebb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue" afterDir="false" />
     </list>
@@ -41,13 +41,6 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="mis_kalkulator_2019: schema" type="76f4a085:MysqlImplModel$Schema" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="mis_kalkulator_2019@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="mis_kalkulator_2019: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="glass_models: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
     </expand>
     <select />
   </component>
@@ -56,8 +49,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="15" column="106" selection-start-line="15" selection-start-column="106" selection-end-line="15" selection-end-column="106" />
+            <state relative-caret-position="306">
+              <caret line="18" column="111" selection-start-line="18" selection-start-column="111" selection-end-line="18" selection-end-column="111" />
             </state>
           </provider>
         </entry>
@@ -262,56 +255,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="helpers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
@@ -366,7 +310,7 @@
       <workItem from="1556443088342" duration="11007000" />
       <workItem from="1556473579188" duration="11985000" />
       <workItem from="1556558444556" duration="14784000" />
-      <workItem from="1556639819091" duration="7951000" />
+      <workItem from="1556639819091" duration="10883000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1555769297195</created>
@@ -452,11 +396,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556566487645</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="new taks -&gt; add product = glass model select boxes are ready to use">
+      <created>1556648938080</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1556648938080</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="145820000" />
+    <option name="totallyTimeSpent" value="148752000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -485,7 +436,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" weight="0.21815519" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.21815519" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19591528" />
@@ -529,7 +480,8 @@
     <MESSAGE value="Created basic for work with frontend - installed vuetify etc" />
     <MESSAGE value="First vuetify page - new order - almost finished frontend" />
     <MESSAGE value="created new glass pane component - half work done" />
-    <option name="LAST_COMMIT_MESSAGE" value="created new glass pane component - half work done" />
+    <MESSAGE value="new taks -&gt; add product = glass model select boxes are ready to use" />
+    <option name="LAST_COMMIT_MESSAGE" value="new taks -&gt; add product = glass model select boxes are ready to use" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/Http/Requests/PlaceOfDeliveryRequestValidation.php">
@@ -856,8 +808,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="15" column="106" selection-start-line="15" selection-start-column="106" selection-end-line="15" selection-end-column="106" />
+        <state relative-caret-position="306">
+          <caret line="18" column="111" selection-start-line="18" selection-start-column="111" selection-end-line="18" selection-end-column="111" />
         </state>
       </provider>
     </entry>

@@ -4,7 +4,6 @@
 <v-card>
   <v-toolbar color="blue-grey" dark dense><v-toolbar-title>{{ formTitle }}</v-toolbar-title></v-toolbar>
   <v-card-text pa-2>
-    <v-form>
       <h4>Rodzaj szkła</h4>
       <v-layout>
           <v-flex xs12 md5 px-2><v-select label="Materiał" :items="materials" :disabled="materials.length <= 0" item-text="name"
@@ -12,9 +11,13 @@
           <v-flex xs12 md4 px-2>
             <v-select label="Typ" :items="materialTypes"  :disabled="materialTypes.length <= 1" item-text="name" prepend-icon="crop_original"
               item-value="id" @change="choosedMaterialTypeId" :value="materialTypes[0]"></v-select></v-flex>
-          <v-flex xs12 md3 px-2>
-            <v-select label="Grubość" :items="thickness" item-text="name" :disabled="thickness.length <= 0"
+          <v-flex xs12 md3 px-2 v-if="glassMarks <= 0">
+            <v-select label="Grubość" :items="thickness" item-text="name" :disabled="thickness.length <= 1"
               append-icon="vertical_align_center" @change="choosedThicknessName" :value="thickness[0]"
+            ></v-select></v-flex>
+          <v-flex xs12 md3 px-2 v-else>
+            <v-select label="Oznaczenie" :items="glassMarks" item-text="name" :disabled="glassMarks.length <= 1"
+                      append-icon="description" @change="choosedGlassMarksName" :value="glassMarks[0]"
             ></v-select></v-flex>
       </v-layout>
       <h4>Wymiary tafli</h4>
@@ -62,7 +65,6 @@
 
     <h2>Cena produktu: {{ totalValueInPennyShowed }} zł</h2>
     <v-btn @click="showWhatIgot">Pokaż jakie zmienne mam</v-btn>
-    </v-form>
   </v-card-text>
   <v-card-actions>
     <v-btn color="amber darken-4" flat dark @click="closeDialog">Anuluj</v-btn>
@@ -79,9 +81,9 @@
     data () {return {
       isDialogOpen: false,
       materials: [], materialTypes: [], thickness: [], cutModels: [], holes: [], additionalServices: [], services: [],
-      holePrices: [], servicesList: [], glassModels: [],
+      holePrices: [], servicesList: [], glassModels: [], glassMarks: [],
       totalValueInPennyShowed: 12242,
-      choosenMaterialId: 1, choosenMaterialTypeId: null, choosenThicknessName: null,
+      choosenMaterialId: 1, choosenMaterialTypeId: null, choosenThicknessName: null, choosenGlassMarksName: null,
       allMaterialTypes: [],
     }},
     created() {
@@ -118,12 +120,15 @@
       //Countable getters
       //Show methods
       showWhatIgot(){
+        // console.log(this.choosenMaterialId);
+        // console.log(this.choosenMaterialTypeId);
+        // console.log(this.choosenThicknessName);
+        // console.log(this.choosenGlassMarksName);
+
         // console.log(this.materials);
-        console.log(this.choosenMaterialId);
-        console.log(this.choosenMaterialTypeId);
         // console.log(this.materialTypes);
-        // console.log(this.thickness);
-        console.log(this.choosenThicknessName);
+        console.log(this.thickness);
+        // console.log(this.glassMarks);
         // console.log(this.cutModels);
         // console.log(this.holes);
         // console.log(this.additionalServices);
@@ -131,6 +136,10 @@
         // console.log(this.services);
         // console.log(this.servicesList);
         // console.log(this.holePrices);
+
+
+
+
       },
       //Getters counted
       gettedMaterials(data) {
@@ -146,20 +155,53 @@
         this.changeGlassModelThicknessList();
       },
       //Selectbox choosed options - what to do if i check smth
-      choosedMaterialId(id){this.choosenMaterialId = id; this.changeMaterialTypesList(); this.changeGlassModelThicknessList();},
-      choosedMaterialTypeId(id){this.choosenMaterialTypeId = id; this.changeGlassModelThicknessList();},
+      choosedMaterialId(id){
+        this.choosenMaterialId = id;
+        this.changeMaterialTypesList();
+        this.changeGlassModelGlassMarksList();
+        this.changeGlassModelThicknessList();
+      },
+      choosedMaterialTypeId(id){
+        this.choosenMaterialTypeId = id;
+        this.changeGlassModelGlassMarksList();
+        this.changeGlassModelThicknessList();
+      },
       choosedThicknessName(name){this.choosenThicknessName = name;},
+      choosedGlassMarksName(name){
+        this.choosenGlassMarksName = name;
+        this.changeGlassModelThicknessList();
+      },
       //Changed options - update lists in selectboxes
+      changeGlassModelGlassMarksList() {
+        let data = this.glassModels.sort((a,b) => a.glass_mark - b.glass_mark);
+        let materialId = this.choosenMaterialId;
+        let materialTypeId = this.choosenMaterialTypeId;
+        this.glassMarks = [];
+
+        this.glassMarks = data.filter(function(obj) {
+          return ((obj.material_id == materialId) &&
+                 (obj.material_type_id == materialTypeId) &&
+                 (obj.glass_mark != null));
+        }).map(function(obj) {return {name: obj.glass_mark}});
+
+        if (this.glassMarks.length > 0) {
+          this.choosenGlassMarksName = this.glassMarks[0].name;
+        } else {
+          this.choosenGlassMarksName = null;
+        }
+      },
+
       changeGlassModelThicknessList() {
         let data = this.glassModels.sort((a,b) => a.thickness - b.thickness);
         let materialId = this.choosenMaterialId;
         let materialTypeId = this.choosenMaterialTypeId;
+        let glassMarkName = this.choosenGlassMarksName;
         this.thickness = [];
 
         this.thickness = data.filter(function(obj) {
-          return ((obj.material_id == materialId)&&
-                ((obj.material_type_id == null)||
-                (obj.material_type_id == materialTypeId)));
+          return ((obj.material_id == materialId) &&
+            (obj.material_type_id == materialTypeId) &&
+            (obj.glass_mark == glassMarkName));
         }).map(function(obj) {return {name: obj.thickness/1000 + ' mm'}});
 
         if (this.thickness.length > 0) {
