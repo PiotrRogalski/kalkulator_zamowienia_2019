@@ -10,7 +10,7 @@ class GlassModel extends Model
     public $timestamps = false;
     use SoftDeletes;
     protected $guarded = ['id'];
-    protected $hidden = ['id', 'deleted_at'];
+    protected $hidden = ['deleted_at'];
 //    protected $hidden = ['id', 'material_id', 'material_type_id', 'deleted_at'];
 
     public function material() {

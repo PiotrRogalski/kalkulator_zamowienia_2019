@@ -62,20 +62,17 @@ INSERT INTO `hole_prices`(`diameter_from`, `diameter_to`, `price`) VALUES
 ('41','59999','2000');
 
 
-INSERT INTO `configs`
-(
-    `distance_km_price`,
-    `free_delivery_from_price`,
-    `free_delivery_distance`,
-    `company_metadata`,
-    `last_company_metadata`,
-    `standard_order_time`,
-    `time_of_order_limitation`,
-    `printing_unit_glass_dimension`,
-    `unit_glass_dimension`
-)
-VALUES
-('200','1500000','15','Informacje o firmie','Poprzednie info o firmie','30','360','mm','cm');
+INSERT INTO `configs` (`display_name`, `description`, `variable_name`, `value`) VALUES
+('Cena za km', 'Cena za kilometr trasy', 'distance_km_price', '200'),
+('Darmowa dostawa od kwoty', 'Powyżej tej kwoty na zamówieniu dostawa jest darmowa', 'free_delivery_from_price', '1500000'),
+('Nie licz ceny za km poniżej', 'Do ilu kilometrów dostawa nie obejmuje kosztów za km a jedynie koszt wyjazdu', 'free_delivery_distance', '15'),
+('Informacje o firmie', 'Tutaj możesz umieścić podstawowe dane o firmie - nip, adress, godziny otwarcia itp', 'company_metadata', 'Informacje o firmie'),
+('Poprzednie informacjie o firmie', 'Kopia zapasowa ostatnio wprowadzanych zmian', 'last_company_metadata', 'Poprzednie info o firmie'),
+('Standardowy czas realizacji zamówienia', 'Domyślny czas na realizację zamówienia to data dodania zamówienia plus ta wartość (podana w dniach)', 'standard_order_time', '30'),
+('Czas przedawnienia zamówienia', 'Po ilu dniach od dodania zamówienie zostanie automatycznie zakończone', 'time_of_order_limitation', '360'),
+('Drukowana jednostka wymiarów', 'Czyli w jakiej jednostce np. wymiary tafli zostaną pokazane na wydruku rozróżnia [mm, cm, m]', 'printing_unit_glass_dimension', 'mm'),
+('Jednostka wymiarów w aplikacji', 'Czyli w jakiej jednostce podane są np. wymiary tafli w formularzach w aplikacji np. wymiary tafli', 'unit_glass_dimension', 'cm');
+
 
 INSERT INTO `place_of_deliveries`(`name`, `distance`) VALUES
 ('Adamowo','8'),
@@ -141,8 +138,6 @@ INSERT INTO `place_of_deliveries`(`name`, `distance`) VALUES
 ('Markusy','12'),
 ('Kamionek Wielki','12');
 
-
---thickness in micro meter
 INSERT INTO `glass_models`(`name`, `material_id`, `material_type_id`, `thickness`, `glass_mark`, `unit`, `price`) VALUES
 ('szkło 3mm','1',null,'3000',null,'m2','67'),
 ('szkło 4mm','1',null,'4000',null,'m2','84'),
@@ -200,51 +195,14 @@ INSERT INTO `cut_models`(`name`, `material_id`, `material_type_id`, `thickness_f
 ('sztorc/mat',null,null,null,null,'m2','135'),
 ('zatępianie',null,null,null,null,'mb','060'),
 ('podwójna zejma',null,null,null,null,'szt','320'),
-('fazowanie do  20mm grubość szkła 4mm',null,null,'0','20','mb','2200'),
-('fazowanie pow 20mm grubość szkła 4mm',null,null,'20',null,'mb','2700'),
-('fazowanie do  20mm grubość szkła 6mm',null,null,'0','20','mb','3000'),
-('fazowanie pow 20mm grubość szkła 6mm',null,null,'20',null,'mb','3500'),
-('fazowanie do  20mm grubość szkła 8mm',null,null,'0','20','mb','3200'),
-('fazowanie pow 20mm grubość szkła 8mm',null,null,'20',null,'mb','3700');
+('fazowanie do  20mm grubość szkła 4mm',null,null,'4','4','mb','2200'),
+('fazowanie pow 20mm grubość szkła 4mm',null,null,'4','4','mb','2700'),
+('fazowanie do  20mm grubość szkła 6mm',null,null,'6','6','mb','3000'),
+('fazowanie pow 20mm grubość szkła 6mm',null,null,'6','6','mb','3500'),
+('fazowanie do  20mm grubość szkła 8mm',null,null,'8','8','mb','3200'),
+('fazowanie pow 20mm grubość szkła 8mm',null,null,'8','8','mb','3700');
 
 
 INSERT INTO `users`(`name`, `email`, `password`, `created_at`, `updated_at`) VALUES
 ('root','root@root','$2y$10$cSQdfdz/9pDAe8MSmsuPYemtbW7U.v4QwJdtETe7KP6HfCBtczMDW','2019-04-19 17:06:55','2019-04-24 18:06:55'),
 ('mis','mis@mis','$2y$10$hxiKbChn/hNzr0.ExwQfreB9dJ8rZ8.a3dsklObRF2esSQ0epoVgO','2019-04-24 18:06:55','2019-04-24 18:06:55');
-
--- root@root, root, archaniol
--- mis@mis, mis , mis&2019
-
----------------------------------------EXAMPLE DATA------------------------------------------
-
-INSERT INTO `clients`(`full_name`, `phone_number`, `place_of_delivery_id`, `default_distance`) VALUES
-('Piotr Rogalski','506 901 791','6','0'),
-('Stanisław Wyszyński','123 456 789','2','0'),
-('Ola Bek','123 456 789','2','0'),
-('Ola','123 456 789','2','0'),
-('ImięPietnastoLi NazwiskoTrzydziestoLiteroweŁał','987 654 321','4','0');
-
-INSERT INTO `orders`
-(
-    `order_system_number`,
-    `client_id`,
-    `advance`,
-    `distance`,
-    `percentage_discount`,
-    `total_penny_order_sum`,
-    `created_at`,
-    `deadline_at`
-)
-VALUES
-('Nr001/04/2019','1','0','0','0','10000','2019-03-19 09:35:21','2019-04-19 09:35:21'),
-('Nr002/04/2019','1','100','0','0','10000','2019-03-20 09:35:21','2019-04-20 09:35:21'),
-('Nr003/04/2019','2','0','12','0','10000','2019-03-20 09:35:21','2019-05-20 09:35:21'),
-('Nr004/04/2019','3','0','30','0','10000','2019-03-20 09:35:21','2019-05-20 09:35:21'),
-('Nr005/04/2019','4','0','15','0','10000','2019-02-20 09:35:21','2019-03-20 09:35:21'),
-('Nr006/04/2019','5','0','0','10','10000','2019-03-20 09:35:21','2019-04-20 09:35:21');
-
-
-
-
-
-

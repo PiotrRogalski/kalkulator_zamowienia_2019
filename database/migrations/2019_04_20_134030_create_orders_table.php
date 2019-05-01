@@ -22,7 +22,9 @@ class CreateOrdersTable extends Migration
             $table->unsignedTinyInteger('percentage_discount')->nullable();
             $table->unsignedBigInteger('total_penny_order_sum')->nullable();
             $table->date('created_at');
+            $table->date('receipt_at');
             $table->date('deadline_at');
+            $table->softDeletes();
 
             $table->foreign('client_id')
                   ->references('id')->on('clients')

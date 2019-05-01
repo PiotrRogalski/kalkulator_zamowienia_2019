@@ -10,5 +10,5 @@ class ServiceList extends Model
     public $timestamps = false;
     use SoftDeletes;
     protected $guarded = ['id'];
-    protected $hidden = ['id', 'deleted_at'];
+    protected $hidden = ['deleted_at'];
 }
