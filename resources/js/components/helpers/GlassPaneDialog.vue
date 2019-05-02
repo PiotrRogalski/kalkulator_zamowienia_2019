@@ -76,7 +76,6 @@
     </v-layout>
 
     <h2>Cena produktu: {{ totalValueInPennyShowed }}</h2>
-    <v-btn @click="showWhatIgot">Pokaż jakie zmienne mam</v-btn>
   </v-card-text>
   <v-card-actions>
     <v-btn color="amber darken-4" flat dark @click="closeDialog">Anuluj</v-btn>
@@ -100,6 +99,7 @@
       choosenGlassModelId: null,
       choosenCutModelId: null,
       allMaterialTypes: [], allCutModels: [], holePrices: [], servicesList: [],
+      unitGlassDimension: 'cm',
     }},
     created() {
       this.getMaterials();
@@ -132,27 +132,7 @@
       getGlassModels() {axios.get('/api/glass-models/all').then(res => this.gettedGlassModels(res.data)).catch(e => console.log(e));},
       getHolePrices() {axios.get('/api/hole-prices/all').then(res => this.holePrices = res.data).catch(e => console.log(e));},
       getServicesList() {axios.get('/api/services-list/all').then(res => this.servicesList = res.data).catch(e => console.log(e));},
-      //Countable getters
-      //Show methods
-      showWhatIgot(){
-        // console.log(this.choosenMaterialId);
-        // console.log(this.choosenMaterialTypeId);
-        // console.log(this.choosenThicknessName);
-        // console.log(this.choosenGlassModelId);
-        // console.log(this.choosenCutModelId);
-        // console.log(this.choosenGlassMarksName);
-        // console.log(this.materials);
-        // console.log(this.materialTypes);
-        // console.log(this.thickness);
-        // console.log(this.glassMarks);
-        // console.log(this.cutModels);
-        // console.log(this.glassModels);
-        // console.log(this.holes);
-        // console.log(this.services);
-        // console.log(this.additionalServices);
-        // console.log(this.servicesList);
-        // console.log(this.holePrices);
-      },
+
       //Getters counted
       gettedMaterials(data) {
         this.materials = data;
@@ -168,19 +148,23 @@
       },
       gettedCutModels(data) {
         this.allCutModels = data;
+        this.allCutModels.unshift({
+          id: 0, name: 'Brak', material_id: null, material_type_id: null,
+          thickness_from: null, thickness_to: null, unit: 'szt', price: 0, deleted_at: null
+        });
         this.changeCutModelsList();
       },
 
       //Selectbox choosed options - what to do if i check smth
       choosedGlassPaneWidth(val) {
         //validacja wprowadzonej wartości i usuwa z tego litery
-        this.glassPaneWidth = 99;
+        // this.glassPaneWidth = 100;
         this.changeTotalValueInPenny();
       },
       choosedGlassPaneHeight(val) {
         //validacja i zmiana wartosci - bez liter itp
         //tak jak ta powyzej wywoluje event zmiany ceny
-        this.glassPaneHeight = 99;
+        // this.glassPaneHeight = 100;
         this.changeTotalValueInPenny();
       },
       choosedMaterialId(id){
@@ -213,26 +197,33 @@
 
       //Changed options - update lists in selectboxes
       changeTotalValueInPennyShow() {
-        //zmien sposob wyswietlania tej informacji (ceny) i wyswietl
-        this.totalValueInPennyShowed = this.totalValueInPenny;
+        let pennyPrice = Math.ceil(this.totalValueInPenny);
+        let pln = pennyPrice/100;
+        this.totalValueInPennyShowed = pln + ' zł';
       },
       changeTotalValueInPenny() {
-        let glassModelId = this.choosenGlassModelId;
-        let cutModelId = this.choosenCutModelId;
-        let width = this.glassPaneWidth;
-        let height = this.glassPaneHeight;
-        let glassModels = this.getChoosedGlassModel(['id','price']);
-        let cutModels = this.getChoosedCutModel(['id','price']);
-        let glassModel = glassModels[0];
-        let cutModel = cutModels[0];
-        let canCountGlassPanePrice = (width != 0 && height != 0 && glassModelId > 0 && glassModelId != null);
-        let glassModelLoadedOk = ((glassModelId*1) === (glassModel.id*1));
-        let cutModelLoadedOk = false;
-        if (cutModel != null){cutModelLoadedOk = ((cutModelId*1) === (cutModel.id*1));}
-        let canCountPrice = (canCountGlassPanePrice && glassModelLoadedOk && cutModelLoadedOk);
+        let glassModelId = this.choosenGlassModelId * 1;
+        let quantity = this.glassPaneQuantity*1;
+        let width = this.glassPaneWidth * 1;
+        let height = this.glassPaneHeight * 1;
+        let canCountGlassPanePrice = (width > 0 && height > 0 && glassModelId > 0);
+        let canCountPrice = (canCountGlassPanePrice);
+        let glassModelPrice = 0;
+        let cutModelPrice = 0;
+        let holesPrice = 0;
+        let servicesPrice = 0;
+        let additionalServicesPrice = 0;
+        let sum = 0;
+        if (quantity === 0) quantity = 1;
 
         if (canCountPrice) {
-          let glassModelPrice = this.countGlassModelPrice();
+          glassModelPrice = this.countGlassModelPrice();
+          cutModelPrice = this.countCutModelPrice();
+          holesPrice = this.countHolesPrice();
+          servicesPrice = this.countServicesPrice();
+          additionalServicesPrice = this.countAdditionalServicesPrice();
+          sum = glassModelPrice + cutModelPrice + holesPrice + servicesPrice + additionalServicesPrice;
+          this.totalValueInPenny = sum * quantity;
         } else {
           this.totalValueInPenny = 0;
         }
@@ -268,9 +259,7 @@
 
         if (this.glassMarks.length > 0) {
           this.choosenGlassMarksName = this.glassMarks[0].name;
-        } else {
-          this.choosenGlassMarksName = null;
-        }
+        } else {this.choosenGlassMarksName = null;}
       },
 
       changeGlassModelThicknessList() {
@@ -292,9 +281,7 @@
         if (this.thickness.length > 0) {
           this.choosenThicknessName = this.thickness[0].name;
           this.changeGlassModelId();
-        } else {
-          this.choosenThicknessName = null;
-        }
+        } else {this.choosenThicknessName = null;}
       },
 
       changeMaterialTypesList() {
@@ -319,9 +306,7 @@
 
         if (this.materialTypes.length > 0) {
           this.choosenMaterialTypeId = this.materialTypes[0].id;
-        } else {
-          this.choosenMaterialTypeId = null;
-        }
+        } else {this.choosenMaterialTypeId = null;}
       },
 
       changeCutModelsList() {
@@ -349,15 +334,11 @@
 
         if (this.cutModels.length > 0) {
           this.choosenCutModelId = this.cutModels[0].id;
-        } else {
-          this.choosenCutModelId = null;
-        }
+        } else {this.choosenCutModelId = null;}
       },
       serviceUnit(id) {
         for(let item in this.servicesList) {
-          if (this.servicesList[item].id === id) {
-            return this.servicesList[item].unit;
-          }
+          if (this.servicesList[item].id === id) {return this.servicesList[item].unit;}
         }
         return '?';
       },
@@ -398,7 +379,7 @@
         if (cutModelId === null) return false;
 
         rows = data.filter(function(obj) {
-          let cutModelIdOK = ((obj.id*1) === cutModelId);
+          let cutModelIdOK = ((obj.id*1) === cutModelId*1);
           return cutModelIdOK;
         }).map(function(obj) {
           let object = {};
@@ -408,34 +389,105 @@
 
         return rows;
       },
-      countOneGlassPanePrice(){},
       countGlassModelPrice(){
-        let glassModelId = this.choosenGlassModelId;
+        let glassModelId = this.choosenGlassModelId * 1;
+        let inputDimensionUnit = this.unitGlassDimension;
+        let width = this.glassPaneWidth;
+        let height = this.glassPaneHeight;
         let glassModels = this.getChoosedGlassModel(['id','unit','price']);
         let glassModel = glassModels[0];
         let glassModelLoadedOk = ((glassModelId*1) === (glassModel.id*1));
+        let glassModelIdNotZero = (glassModelId > 0);
+        let canCount = (glassModelLoadedOk && glassModelIdNotZero);
         let price = 0;
-        console.log('loaded');
 
-        if (glassModelLoadedOk) {
-          let multi = this.priceUnitMultiplier(glassModel.unit);
-          console.log(multi);
+        if (canCount) {
+          let multi = this.priceUnitMultiplier(glassModel.unit, width, height, inputDimensionUnit);
+          price = glassModel.price * multi;
+        }
+        return price*100;
+      },
+      countCutModelPrice(){
+        let cutModelId = this.choosenCutModelId * 1;
+        let inputDimensionUnit = this.unitCutDimension;
+        let width = this.glassPaneWidth;
+        let height = this.glassPaneHeight;
+        let cutModels = this.getChoosedCutModel(['id','unit','price']);
+        let cutModel = cutModels[0];
+        let cutModelLoadedOk = ((cutModelId*1) === (cutModel.id*1));
+        let cutModelIdNotZero = (cutModelId > 0);
+        let canCount = (cutModelLoadedOk && cutModelIdNotZero);
+        let price = 0;
+
+        if (canCount) {
+          let multi = this.priceUnitMultiplier(cutModel.unit, width, height, inputDimensionUnit);
+          price = cutModel.price * multi;
         }
         return price;
       },
-      countCutModelPrice(){},
-      countHolesPrice(){},
-      countServicesPrice(){},
-      countAdditionalServicesPrice(){},
-      priceUnitMultiplier(unit){
+      countHolesPrice(){
+        let data = this.holePrices;
+        let holes = this.holes;
+        let len = holes.length;
+        let price = 0;
+        for(let i = 0; i < len; ++i) {
+
+          if (holes[i].diameter.length > 0) {
+            let fi = holes[i].diameter*1;
+            let rows = data.filter(function(obj) {
+              return (obj.diameter_from <= fi && obj.diameter_to >= fi);
+            }).map(function(obj) {return {price: obj.price}});
+            if (rows.length === 0) {return false;}
+            let row = rows[0];
+
+            if ( holes[i].number.length > 0) {
+              price += row.price * holes[i].number;
+            } else {
+              price += row.price;
+            }
+          }
+        }
+        return price;
+      },
+      countServicesPrice(){
+        let data = this.servicesList;
+        let services = this.services;
+        let len = services.length;
+        let price = 0;
+        for(let i = 0; i < len; ++i) {
+            let rows = data.filter(function(obj) {
+              return (obj.id == services[i].service_list_id);
+            }).map(function(obj) {return {price: obj.price, unit: obj.unit}});
+            if (rows.length === 0) {return false;}
+            let row = rows[0];
+
+            if ( services[i].quantity.length > 0) {
+              price += row.price * services[i].quantity*1;
+            } else {price += row.price;}
+        }
+        return price;
+      },
+      countAdditionalServicesPrice(){
+        let additionalServices = this.additionalServices;
+        let len = additionalServices.length;
+        let price = 0;
+        for(let i = 0; i < len; ++i) {price += additionalServices[i].price*1}
+        return price*100;
+      },
+      priceUnitMultiplier(unit, width, height, dimensionsUnit){
+        let w = width*1;
+        let h = height*1;
         let multiplier = 0;
-        let width = this.glassPaneWidth;
-        let height = this.glassPaneHeight;
+        let divider = 100;
+        switch (dimensionsUnit) {
+          case 'mm': divider = 1000; break;
+          case 'cm': divider = 100; break;
+        }
 
         switch (unit) {
           case 'szt': multiplier = 1; break;
-          case 'm2': multiplier = width * height / 1000000; break;
-          case 'mb': multiplier = 2*(width + height) / 1000; break;
+          case 'm2': multiplier = w * h / (divider * divider); break;
+          case 'mb': multiplier = (2*(w + h)) / divider; break;
         }
         return multiplier;
       },

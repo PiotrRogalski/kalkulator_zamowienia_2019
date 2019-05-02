@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f5d7c06-79b2-432a-bdd9-0dc59282bebb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/sql2.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CutModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CutModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/GlassModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/GlassModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ServiceList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ServiceList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_04_20_134030_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_04_20_134030_create_orders_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_04_20_134055_create_configs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_04_20_134055_create_configs_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/sql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tests/sql.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,13 +41,6 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="mis_kalkulator_2019: schema" type="76f4a085:MysqlImplModel$Schema" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="mis_kalkulator_2019@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="mis_kalkulator_2019: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="glass_panes: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
     </expand>
     <select />
   </component>
@@ -63,8 +49,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="417" column="27" selection-start-line="417" selection-start-column="27" selection-end-line="417" selection-end-column="27" />
+            <state relative-caret-position="499">
+              <caret line="474" column="24" selection-start-line="474" selection-start-column="24" selection-end-line="474" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -80,13 +66,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pro</find>
-      <find>items</find>
-      <find>props</find>
-      <find>glassModel</find>
-      <find>glassModels</find>
-      <find>glass</find>
-      <find>materials</find>
       <find>getMaterialId</find>
       <find>allMaterialTypes</find>
       <find>materialTypes</find>
@@ -107,9 +86,16 @@
       <find>glassMa</find>
       <find>choosedCutModelId</find>
       <find>changeCutModelsList</find>
-      <find>choosenCutModelId</find>
       <find>changeglassmodelid</find>
       <find>consoe</find>
+      <find>countGlassModelPrice</find>
+      <find>99100</find>
+      <find>Width</find>
+      <find>countGlass</find>
+      <find>length</find>
+      <find>totalValueInPennyShowed</find>
+      <find>materialType</find>
+      <find>choosenCutModelId</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -259,8 +245,8 @@
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="167" />
     <option name="y" value="73" />
-    <option name="width" value="697" />
-    <option name="height" value="745" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -269,56 +255,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="helpers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
@@ -374,7 +311,8 @@
       <workItem from="1556473579188" duration="11985000" />
       <workItem from="1556558444556" duration="14784000" />
       <workItem from="1556639819091" duration="25129000" />
-      <workItem from="1556703873898" duration="16160000" />
+      <workItem from="1556703873898" duration="16286000" />
+      <workItem from="1556814426578" duration="13020000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1555769297195</created>
@@ -474,11 +412,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556651800746</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="new task - add product -&gt; working with price">
+      <created>1556744900702</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1556744900731</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="179158000" />
+    <option name="totallyTimeSpent" value="192304000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -498,7 +443,7 @@
       <window_info anchor="bottom" id="Database Console" order="7" weight="0.32935917" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49926794" visible="true" weight="0.20417288" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49926794" visible="true" weight="0.20417288" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50073206" side_tool="true" weight="0.20566319" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.29359165" />
       <window_info anchor="bottom" id="Messages" order="13" />
@@ -507,7 +452,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Database" order="3" visible="true" weight="0.21815519" />
+      <window_info anchor="right" id="Database" order="3" weight="0.21815519" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19591528" />
@@ -553,26 +498,10 @@
     <MESSAGE value="created new glass pane component - half work done" />
     <MESSAGE value="new taks -&gt; add product = glass model select boxes are ready to use" />
     <MESSAGE value="new taks -&gt; add product = added glass_mark select box" />
-    <option name="LAST_COMMIT_MESSAGE" value="new taks -&gt; add product = added glass_mark select box" />
+    <MESSAGE value="new task - add product -&gt; working with price" />
+    <option name="LAST_COMMIT_MESSAGE" value="new task - add product -&gt; working with price" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Service.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="31" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ServiceController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
-          <folding>
-            <element signature="e#40#87#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_04_20_134045_create_services_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -730,13 +659,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/hole_prices">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/clients">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -834,31 +756,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/cut_models">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/NewOrders.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="198" column="30" lean-forward="true" selection-start-line="198" selection-start-column="30" selection-end-line="198" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/ServiceList.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/service_lists">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -883,10 +784,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/configs">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/hole_prices">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/holes">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/cut_models">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/service_lists">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/NewOrders.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="18" column="21" lean-forward="true" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="417" column="27" selection-start-line="417" selection-start-column="27" selection-end-line="417" selection-end-column="27" />
+        <state relative-caret-position="499">
+          <caret line="474" column="24" selection-start-line="474" selection-start-column="24" selection-end-line="474" selection-end-column="24" />
         </state>
       </provider>
     </entry>
