@@ -2,7 +2,11 @@
 <v-layout row justify-center>
 <v-dialog v-model="isDialogOpen" width="600px" persistent>
 <v-card>
-  <v-toolbar color="blue-grey" dark dense><v-toolbar-title>{{ formTitle }}</v-toolbar-title></v-toolbar>
+  <v-toolbar color="blue-grey" dark dense>
+    <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn icon flat dark @click="closeDialog"><v-icon>close</v-icon></v-btn>
+  </v-toolbar>
   <v-card-text pa-2>
       <h4>Rodzaj szkła</h4>
       <v-layout>
@@ -27,6 +31,7 @@
         <v-btn flat disabled fab small><v-icon dark>clear</v-icon></v-btn>
         <v-flex px-3 xs12 md5><v-text-field label="Wysokość" suffix="cm" prepend-icon="unfold_more" v-model="glassPaneHeight"
               @change="choosedGlassPaneHeight"></v-text-field></v-flex>
+        <p v-if="(glassPaneWidth*1 !== 0 && glassPaneHeight*1 !== 0)">Powierzchnia: {{ areaInSquareMeters }}</p>
       </v-layout>
       <h4>Rodzaj szlifu</h4>
       <v-layout>
@@ -76,11 +81,17 @@
     </v-layout>
 
     <h2>Cena produktu: {{ totalValueInPennyShowed }}</h2>
+    <p v-if="(glassPaneWidth*1 === 0 || glassPaneHeight*1 === 0)" class="red--text">
+      Uzupełnij wysokość i szerokość tafli!
+    </p>
   </v-card-text>
-  <v-card-actions>
+  <v-card-actions v-if="(glassPaneWidth*1 === 0 || glassPaneHeight*1 === 0)">
+    <v-btn block color="amber darken-4" flat dark @click="closeDialog">Anuluj</v-btn>
+  </v-card-actions>
+  <v-card-actions v-else>
     <v-btn color="amber darken-4" flat dark @click="closeDialog">Anuluj</v-btn>
     <v-spacer></v-spacer>
-    <v-btn color="green darken-1" dark @click="closeDialog">Zapisz</v-btn>
+    <v-btn color="green darken-1" dark @click="saveDialog">Zapisz</v-btn>
   </v-card-actions>
 </v-card>
 </v-dialog>
@@ -88,15 +99,15 @@
 </template>
 <script>
   export default {
-    props: ['obj'],
+    // props: ['obj'],
     data () {return {
       isDialogOpen: false,
       materials: [], materialTypes: [], thickness: [], cutModels: [], glassModels: [], glassMarks: [],
       holes: [], additionalServices: [], services: [],
-      totalValueInPennyShowed: '0 zł', totalValueInPenny: 0,
-      glassPaneQuantity: 0, glassPaneWidth: 0, glassPaneHeight: 0,
+      totalValueInPennyShowed: '0 zł', totalValueInPenny: 0, index: -1,
+      glassPaneQuantity: 0, glassPaneWidth: 0, glassPaneHeight: 0, areaInSquareMeters: '0 m2',
       choosenMaterialId: 1, choosenMaterialTypeId: null, choosenThicknessName: null, choosenGlassMarksName: null,
-      choosenGlassModelId: null,
+      choosenGlassModelId: null, choosenGlassModelName: null, choosenCutModelId: null,
       choosenCutModelId: null,
       allMaterialTypes: [], allCutModels: [], holePrices: [], servicesList: [],
       unitGlassDimension: 'cm',
@@ -116,9 +127,11 @@
     methods: {
       lisen(){
         EventBus.$on('openAddGlassPaneDialog', () => {this.isDialogOpen = true;});
-        EventBus.$on('closeAddGlassPaneDialog', () => {this.isDialogOpen = false;});
+        EventBus.$on('closeAddGlassPaneDialog', () => {this.resetVariables(); this.isDialogOpen = false;});
+        EventBus.$on('openToEditGlassPaneDialog', (obj) => {this.assignGlassPaneObjectToEditing(obj);});
       },
       closeDialog(){EventBus.$emit('closeAddGlassPaneDialog');},
+      saveDialog(){this.emitGlassPaneObj(); this.closeDialog();},
       addHole() {let obj = {number: '', diameter: ''}; this.holes.push(obj);},
       deleteHole(item) {let index = this.holes.indexOf(item); this.holes.splice(index, 1); this.changeTotalValueInPenny();},
       addService() {let obj = {service_list_id: '', quantity: ''}; this.services.push(obj);},
@@ -145,6 +158,7 @@
         this.glassModels = data;
         this.changeMaterialTypesList();
         this.changeGlassModelThicknessList();
+        this.changeTotalValueInPenny();
       },
       gettedCutModels(data) {
         this.allCutModels = data;
@@ -156,17 +170,8 @@
       },
 
       //Selectbox choosed options - what to do if i check smth
-      choosedGlassPaneWidth(val) {
-        //validacja wprowadzonej wartości i usuwa z tego litery
-        // this.glassPaneWidth = 100;
-        this.changeTotalValueInPenny();
-      },
-      choosedGlassPaneHeight(val) {
-        //validacja i zmiana wartosci - bez liter itp
-        //tak jak ta powyzej wywoluje event zmiany ceny
-        // this.glassPaneHeight = 100;
-        this.changeTotalValueInPenny();
-      },
+      choosedGlassPaneWidth(val) {this.getAreaInSquareMeters();this.changeTotalValueInPenny();},
+      choosedGlassPaneHeight(val) {this.getAreaInSquareMeters();this.changeTotalValueInPenny();},
       choosedMaterialId(id){
         this.choosenMaterialId = id;
         this.changeMaterialTypesList();
@@ -285,7 +290,8 @@
       },
 
       changeMaterialTypesList() {
-        let data = this.glassModels.sort((a,b) => a.material_type_id - b.material_type_id);
+        let data = this.glassModels.sort((
+          a,b) => a.material_type_id - b.material_type_id);
         if (data.length === 0) {return false;}
         let materialId = this.choosenMaterialId;
         let materialTypeIds = [];
@@ -394,7 +400,7 @@
         let inputDimensionUnit = this.unitGlassDimension;
         let width = this.glassPaneWidth;
         let height = this.glassPaneHeight;
-        let glassModels = this.getChoosedGlassModel(['id','unit','price']);
+        let glassModels = this.getChoosedGlassModel(['id','name','unit','price']);
         let glassModel = glassModels[0];
         let glassModelLoadedOk = ((glassModelId*1) === (glassModel.id*1));
         let glassModelIdNotZero = (glassModelId > 0);
@@ -404,6 +410,7 @@
         if (canCount) {
           let multi = this.priceUnitMultiplier(glassModel.unit, width, height, inputDimensionUnit);
           price = glassModel.price * multi;
+          this.choosenGlassModelName = glassModel.name;
         }
         return price*100;
       },
@@ -412,7 +419,7 @@
         let inputDimensionUnit = this.unitCutDimension;
         let width = this.glassPaneWidth;
         let height = this.glassPaneHeight;
-        let cutModels = this.getChoosedCutModel(['id','unit','price']);
+        let cutModels = this.getChoosedCutModel(['id', 'name', 'unit', 'price']);
         let cutModel = cutModels[0];
         let cutModelLoadedOk = ((cutModelId*1) === (cutModel.id*1));
         let cutModelIdNotZero = (cutModelId > 0);
@@ -422,6 +429,8 @@
         if (canCount) {
           let multi = this.priceUnitMultiplier(cutModel.unit, width, height, inputDimensionUnit);
           price = cutModel.price * multi;
+          this.choosenCutModelName = cutModel.name;
+
         }
         return price;
       },
@@ -430,6 +439,7 @@
         let holes = this.holes;
         let len = holes.length;
         let price = 0;
+        let singleHolePrice = 0;
         for(let i = 0; i < len; ++i) {
 
           if (holes[i].diameter.length > 0) {
@@ -441,10 +451,13 @@
             let row = rows[0];
 
             if ( holes[i].number.length > 0) {
-              price += row.price * holes[i].number;
+              singleHolePrice = row.price * holes[i].number;
             } else {
-              price += row.price;
+              singleHolePrice = row.price;
             }
+            holes[i].price = singleHolePrice;
+            holes[i].unit = 'szt';
+            price += singleHolePrice;
           }
         }
         return price;
@@ -453,17 +466,23 @@
         let data = this.servicesList;
         let services = this.services;
         let len = services.length;
+        let singleServicePrice = 0;
         let price = 0;
         for(let i = 0; i < len; ++i) {
             let rows = data.filter(function(obj) {
               return (obj.id == services[i].service_list_id);
-            }).map(function(obj) {return {price: obj.price, unit: obj.unit}});
+            }).map(function(obj) {return {price: obj.price, unit: obj.unit, name: obj.name}});
             if (rows.length === 0) {return false;}
             let row = rows[0];
 
-            if ( services[i].quantity.length > 0) {
-              price += row.price * services[i].quantity*1;
-            } else {price += row.price;}
+            if ( services[i].quantity.length > 0) {singleServicePrice = row.price * services[i].quantity*1;}
+            else {singleServicePrice = row.price;}
+
+            services[i].price = singleServicePrice;
+            services[i].unit = row.unit;
+            services[i].name = row.name;
+
+            price += singleServicePrice;
         }
         return price;
       },
@@ -490,6 +509,73 @@
           case 'mb': multiplier = (2*(w + h)) / divider; break;
         }
         return multiplier;
+      },
+      resetVariables() {
+          this.holes = [];
+          this.additionalServices = [];
+          this.services = [];
+          this.totalValueInPennyShowed = '0 zł';
+          this.totalValueInPenny = 0;
+          this.glassPaneQuantity ='';
+          this.glassPaneWidth = '';
+          this.glassPaneHeight = '';
+          this.areaInSquareMeters = 0;
+          this.index = -1;
+      },
+      getAreaInSquareMeters() {
+        let width = this.glassPaneWidth*1;
+        let height = this.glassPaneHeight*1;
+        let unit = this.unitGlassDimension;
+        let areaInSquareMeters = 0;
+        let divider = 100;
+
+        if (width !== 0 && height !== 0) {
+          switch (unit) {
+            case 'mm': divider = 1000; break;
+            case 'cm': divider = 100; break;
+          }
+          areaInSquareMeters =  (width*height) / (divider * divider);
+        }
+        this.areaInSquareMeters = areaInSquareMeters + ' m2';
+      },
+      emitGlassPaneObj() {
+        let glassPaneObj = {};
+        glassPaneObj.glass_model_id = this.choosenGlassModelId;
+        if (this.choosenGlassModelName*1 === 0 || this.choosenGlassModelId === 0) {
+          glassPaneObj.glass_model_name = 'Brak';
+        } else {
+          glassPaneObj.glass_model_name = this.choosenGlassModelName;
+        }
+        glassPaneObj.width = this.glassPaneWidth;
+        glassPaneObj.height = this.glassPaneHeight;
+        glassPaneObj.cut_model_id = this.choosenCutModelId;
+        if (this.choosenCutModelName*1 === 0 || this.choosenCutModelId === 0) {
+          glassPaneObj.cut_model_name = 'Brak';
+        } else {
+          glassPaneObj.cut_model_name = this.choosenCutModelName;
+        }
+        if (this.glassPaneQuantity*1 > 0) {glassPaneObj.quantity = this.glassPaneQuantity*1;}
+        else {glassPaneObj.quantity = 1;}
+        glassPaneObj.price = this.totalValueInPenny;
+        glassPaneObj.holes = this.holes;
+        glassPaneObj.services = this.services;
+        glassPaneObj.additionalServices = this.additionalServices;
+        glassPaneObj.unitGlassPaneDimension = this.unitGlassDimension;
+        glassPaneObj.index = this.index;
+
+        EventBus.$emit('addGlassPaneToProductsList', glassPaneObj);
+      },
+      assignGlassPaneObjectToEditing(obj) {
+        this.holes = obj.holes;
+        this.additionalServices = obj.additionalServices;
+        this.services = obj.services;
+        this.totalValueInPenny = obj.price;
+        this.glassPaneQuantity = obj.quantity;
+        this.glassPaneWidth = obj.width;
+        this.glassPaneHeight = obj.height;
+        this.index = obj.index;
+        this.getAreaInSquareMeters();
+        this.changeTotalValueInPennyShow();
       },
     },
   }

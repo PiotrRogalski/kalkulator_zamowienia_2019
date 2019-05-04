@@ -106,31 +106,31 @@
 
 
   <!--DIALOG DODAJ/EDYTUJ TAFLĘ SZKŁA-->
-  <glass-pane-dialog :editing-index="editedIndex" :obj="sendObject"></glass-pane-dialog>
+  <!--<glass-pane-dialog :editing-index="editedIndex" :obj="sendObject"></glass-pane-dialog>-->
+  <glass-pane-dialog></glass-pane-dialog>
   <!--KONIEC DIALOGU-->
   <!--PRAWA STRONA-->
   <v-flex xs12 lg6>
   <v-toolbar color="indigo" dark dense>
-    <v-toolbar-title>Tafle szkła</v-toolbar-title>
-    <v-spacer></v-spacer>
     <info-dialog :message="paneSectionInfo"></info-dialog>
+    <v-toolbar-title>Tafle szkła</v-toolbar-title>
   </v-toolbar>
     <v-btn block color="blue-grey" dark @click="openGlassPaneDialog">DODAJ PRODUKT</v-btn>
     <v-data-table
       :headers="headers"
-      :items="producs"
+      :items="products"
       :expand="expand"
       class="elevation-1"
       hide-actions
-      item-key="name"
+      item-key="index"
       :rows-per-page-items="rowsPerPageItems"
       :pagination.sync="pagination"
     >
       <template v-slot:items="props">
         <tr @click="props.expanded = !props.expanded">
-          <td><b>{{ props.item.name }}</b></td>
+          <td><b>{{ props.item.glass_model_name }}</b></td>
           <td class="text-xs-right">{{ props.item.quantity }} szt</td>
-          <td class="text-xs-right">{{ props.item.price }} zł</td>
+          <td class="text-xs-right">{{ Math.round(props.item.price,2)/100 }} zł</td>
           <td class="justify-center layout px-0">
             <v-icon class="mr-2 mt-2" @click="editItem(props.item)">edit</v-icon>
             <v-icon class="mt-2" @click="deleteItem(props.item)">delete</v-icon>
@@ -145,7 +145,12 @@
       </template>
       <template v-slot:expand="props">
         <v-card flat>
-          <v-card-text>Peek-a-boo!{{ props.item.name }}</v-card-text>
+          <v-card-text>
+            <v-layout>
+              <v-flex xs12 md6> Szlif: {{ props.item.cut_model_name }}</v-flex>
+              <v-flex xs12 md6> Wymiary: {{props.item.width}} x {{props.item.height}} {{props.item.unitGlassPaneDimension}}</v-flex>
+            </v-layout>
+          </v-card-text>
         </v-card>
       </template>
     </v-data-table>
@@ -204,16 +209,12 @@
         'wciąż swobodnie zmieniać i edytować a nawet usuwać.',
       confirmDeleteMessage: 'Na pewno chcesz usunąć ten produkt ze zlecenia?',
       headers: [
-        {text: 'Nazwa', value: 'name', align: 'left'},
+        {text: 'Nazwa', value: 'glass_model_name', align: 'left'},
         {text: 'Ilość', value: 'quantity'},
         {text: 'Cena', value: 'price'},
-        {text: 'Akcje', value: 'name', sortable: false}
+        {text: 'Akcje', value: 'glass_model_id', sortable: false}
       ],
-      producs: [],
-      editedIndex: -1,
-      editedItem: { name: '', quantity: 0, price: 0},
-      defaultItem: { name: '', quantity: 0, price: 0},
-      sendObject: {},
+      products: [], productCurrentIndex: 0,
     }),
 
     methods: {
@@ -221,31 +222,21 @@
       closeGlassPaneDialog() {nd2.closeGlassPaneDialog();},
       parseDate(date){return nd2.parseDate(date)},
       lisen() {
-        EventBus.$on('closeAddGlassPaneDialog', () => {this.sendObject = {}; });
+        EventBus.$on('addGlassPaneToProductsList', (obj) => {this.addProduct(obj); });
       },
-      editItem (item) {
-        this.sendObject = item;
-        this.editedIndex = this.producs.indexOf(item);
-        this.editedItem = Object.assign({}, item);
-        this.openGlassPaneDialog();
+      editItem (item) {EventBus.$emit('openToEditGlassPaneDialog', item); this.openGlassPaneDialog();},
+      deleteItem (item) {const index = this.products.indexOf(item); confirm(this.confirmDeleteMessage) && this.products.splice(index, 1)},
+      close () {this.closeGlassPaneDialog();},
+      addProduct(obj) {
+        // add new or else update product
+        if ((typeof(obj.index) === "undefined") || (obj.index === -1)) {
+          obj.index = this.productCurrentIndex;
+          this.productCurrentIndex++;
+          this.products.push(obj);
+        } else {
+          this.products.splice(obj.index, 1, obj);
+        }
       },
-      deleteItem (item) {
-        const index = this.producs.indexOf(item);
-        confirm(this.confirmDeleteMessage) && this.producs.splice(index, 1)
-      },
-      close () {
-        this.closeGlassPaneDialog();
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem);
-          this.editedIndex = -1
-        }, 300)
-      },
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.producs[this.editedIndex], this.editedItem)
-        } else {this.producs.push(this.editedItem)}
-        this.close()
-      }
     },
 
     computed: {
