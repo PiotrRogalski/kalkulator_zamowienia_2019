@@ -8,5 +8,5 @@ class PlaceOfDelivery extends Model
 {
     public $timestamps = false;
     protected $guarded = ['id'];
-    protected $hidden = ['id'];
+//    protected $hidden = ['id'];
 }

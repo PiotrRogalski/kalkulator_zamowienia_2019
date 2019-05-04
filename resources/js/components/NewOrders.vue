@@ -2,22 +2,21 @@
 <v-layout row wrap>
   <v-flex xs12 lg6>
   <v-toolbar color="blue darken-4" dark dense>
-    <v-toolbar-title>Nowe zamówienie</v-toolbar-title>
-    <v-spacer></v-spacer>
     <info-dialog :message="newOrderInfo"></info-dialog>
+    <v-toolbar-title>Nowe zamówienie</v-toolbar-title>
   </v-toolbar>
   <v-card class="pa-1">
     <v-card-text>
       <h4>Dane klienta</h4>
       <v-combobox
         label="Imię i nazwisko"
-        v-model="fullname"
-        :rules="[() => !!fullname || 'To pole jest wymagane']"
-        :items="states"
+        :rules="[() => !!choosenClient || 'To pole jest wymagane']"
+        :items="clients"
+        item-text="full_name"
         counter="50"
         hide-no-data
-        hide-selected
         prepend-icon="account_box"
+        @change="choosedClient"
       ></v-combobox>
 
       <v-combobox
@@ -28,6 +27,8 @@
         hide-no-data
         hide-selected
         prepend-icon="phone"
+        :value="choosenPhoneNumber"
+        @change="choosedPhoneNumber"
       ></v-combobox>
 
       <v-text-field
@@ -46,18 +47,20 @@
       </v-radio-group>
       <v-combobox v-show="transportType=='outside-city-delivery'"
         label="Miejscowość"
-        v-model="model"
-        :items="states"
+        :items="placeOfDeliveries"
+        item-text="name"
         counter="50"
         hide-no-data
         hide-selected
         prepend-icon="location_on"
+        @change="choosedPlaceOfDelivery"
       ></v-combobox>
       <v-text-field v-show="transportType=='outside-city-delivery'"
         label="Odległość w Km"
         type="number"
         prepend-icon="map"
         suffix="Km"
+        v-model="distanceInKm"
       ></v-text-field>
       <v-flex xs12 lg6>
       <v-menu
@@ -170,43 +173,16 @@
   export default {
     components: {InfoDialog, GlassPaneDialog},
     data: () => ({
-      expand: false,
-      rowsPerPageItems: [10, 20, 30, 40],
-      pagination: {
-        rowsPerPage: 10
-      },
-      isAddGlassPaneOpen: false,
+      expand: false, isAddGlassPaneOpen: false, menu1: false,
+      rowsPerPageItems: [10, 20, 30, 40], pagination: { rowsPerPage: 10},
       date: new Date().toISOString().substr(0, 10),
       dateFormatted: nd2.formatDate(new Date().toISOString().substr(0, 10)),
-      menu1: false,
       model: null,
       fullname:'',
-      inputvalue: 0,
-      states: [
-        'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-        'Arkansas', 'California', 'Colorado', 'Connecticut',
-        'Delaware', 'District of Columbia', 'Federated States of Micronesia',
-        'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
-        'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-        'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
-        'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-        'Missouri', 'Montana', 'Nebraska', 'Nevada',
-        'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-        'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-        'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-        'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-        'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-        'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-      ],
       transportType: 'city-delivery',
-      percentDiscount: 0,
-      moneyDiscount: 0,
-      totalValueInPenny: 1000,
-      totalValueInPennyShowed: 0,
-      newOrderInfo: 'W tej sekcji uzupełnia się informacje dotyczące konkretnego zlecenia.' +
-        'Jedyne wymagane pole do uzupełnienia to imię i nazwisko klienta',
-      paneSectionInfo: 'To jest miejsce na produkty dotyczące tego zlecenia. Prdukty po dodaniu można ' +
-        'wciąż swobodnie zmieniać i edytować a nawet usuwać.',
+      percentDiscount: 0, moneyDiscount: 0, totalValueInPenny: 0, totalValueInPennyShowed: '0 zł',
+      newOrderInfo: 'W tej sekcji uzupełnia się informacje dotyczące konkretnego zlecenia. Jedyne wymagane pole do uzupełnienia to imię i nazwisko klienta',
+      paneSectionInfo: 'To jest miejsce na produkty dotyczące tego zlecenia. Prdukty po dodaniu można wciąż swobodnie zmieniać i edytować a nawet usuwać.',
       confirmDeleteMessage: 'Na pewno chcesz usunąć ten produkt ze zlecenia?',
       headers: [
         {text: 'Nazwa', value: 'glass_model_name', align: 'left'},
@@ -214,31 +190,17 @@
         {text: 'Cena', value: 'price'},
         {text: 'Akcje', value: 'glass_model_id', sortable: false}
       ],
-      products: [], productCurrentIndex: 0,
+      productCurrentIndex: 0,
+      products: [], clients: [], placeOfDeliveries: [],
+      allPlaceOfDeliveries: [], allClients: [],
+      choosenPlaceOfDelivey: {}, choosenClient: {}, choosenPhoneNumber: '',
+      distanceInKm: 0,
     }),
-
-    methods: {
-      openGlassPaneDialog() {nd2.openGlassPaneDialog();},
-      closeGlassPaneDialog() {nd2.closeGlassPaneDialog();},
-      parseDate(date){return nd2.parseDate(date)},
-      lisen() {
-        EventBus.$on('addGlassPaneToProductsList', (obj) => {this.addProduct(obj); });
-      },
-      editItem (item) {EventBus.$emit('openToEditGlassPaneDialog', item); this.openGlassPaneDialog();},
-      deleteItem (item) {const index = this.products.indexOf(item); confirm(this.confirmDeleteMessage) && this.products.splice(index, 1)},
-      close () {this.closeGlassPaneDialog();},
-      addProduct(obj) {
-        // add new or else update product
-        if ((typeof(obj.index) === "undefined") || (obj.index === -1)) {
-          obj.index = this.productCurrentIndex;
-          this.productCurrentIndex++;
-          this.products.push(obj);
-        } else {
-          this.products.splice(obj.index, 1, obj);
-        }
-      },
+    created() {
+      this.getAllClients();
+      this.getAllPlaceOfDeliveries();
+      this.lisen();
     },
-
     computed: {
       computedDateFormatted() {return nd2.formatDate(this.date)},
       getPercentDiscount: {
@@ -266,7 +228,7 @@
             let result = validmoney * 100/total;
             this.percentDiscount = Number((result).toFixed(2));
           }
-           else {this.percentDiscount = 0;}
+          else {this.percentDiscount = 0;}
         },
       },
       pages () {
@@ -274,10 +236,95 @@
         return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
       },
     },
-    watch: {
-      date (val) {this.dateFormatted = nd2.formatDate(this.date)},
-      dialog (val) {val || this.close()},
+    watch: {date (val) {this.dateFormatted = nd2.formatDate(this.date)},dialog (val) {val || this.close()},},
+
+    methods: {
+      openGlassPaneDialog() {nd2.openGlassPaneDialog();},
+      closeGlassPaneDialog() {nd2.closeGlassPaneDialog();},
+      parseDate(date){return nd2.parseDate(date)},
+      lisen() {
+        EventBus.$on('addGlassPaneToProductsList', (obj) => {this.addProduct(obj); });
+      },
+      editItem (item) {EventBus.$emit('openToEditGlassPaneDialog', item); this.openGlassPaneDialog();},
+      deleteItem (item) {const index = this.products.indexOf(item); confirm(this.confirmDeleteMessage) && this.products.splice(index, 1)},
+      close () {this.closeGlassPaneDialog();},
+      addProduct(obj) {
+        // add new or else update product
+        if ((typeof(obj.index) === "undefined") || (obj.index === -1)) {
+          obj.index = this.productCurrentIndex;
+          this.productCurrentIndex++;
+          this.products.push(obj);
+        } else {
+          this.products.splice(obj.index, 1, obj);
+        }
+      },
+      //get from database
+      getAllClients() {axios.get('/api/clients/all').then(res =>  this.gettedAllClients(res.data)).catch(e => console.log(e));},
+      getAllPlaceOfDeliveries() {axios.get('/api/places-of-deliveries/all').then(res =>  this.gettedAllPlaceOfDeliveries(res.data)).catch(e => console.log(e));},
+      //when getted from database
+      gettedAllClients(res){
+        this.allClients = res;
+
+        let testObj = {id: 1, full_name: 'Jan Testowy', phone_number: '678 876 543', place_of_delivery_id: 1, default_distance: 10};
+        this.allClients.unshift(testObj);
+        this.clients = this.allClients;
+      },
+      gettedAllPlaceOfDeliveries(res) {
+        this.allPlaceOfDeliveries = res;
+        this.setAllPlacesOfDelivery();
+      },
+      //when choosed from inputs
+      choosedClient(obj) {
+        if (typeof(obj) === 'string'){
+          this.createNewClient(obj);
+        } else {this.choosenClient = obj;}
+        this.changePhoneNumber();
+      },
+      choosedPhoneNumber(val){
+        this.choosenPhoneNumber = val;
+        if (this.newClientExist()){this.allClients[0].phone_number = val}
+      },
+      choosedPlaceOfDelivery(obj){
+        this.choosenPlaceOfDelivery = obj;
+        this.changeDistanceInKm();
+      },
+      //change the value of (recount)
+      changePhoneNumber(){
+        let clientNumber = this.choosenClient.phone_number;
+        let setNumber = '';
+        if (this.newClientExist()){setNumber = this.allClients[0].phone_number}
+        if (clientNumber){
+          setNumber = clientNumber;
+        }
+        this.choosenPhoneNumber = setNumber;
+      },
+      changeDistanceInKm(){
+        let distance = 0;
+        if (this.choosenPlaceOfDelivey){
+          distance = this.choosenPlaceOfDelivey.distance*1;
+        }
+        this.distanceInKm = distance;
+      },
+      //set some value to other
+      setAllPlacesOfDelivery() {
+        let obj = {id: 0, name: 'Brak', distance: 0};
+        this.allPlaceOfDeliveries.unshift(obj);
+        this.placeOfDeliveries = this.allPlaceOfDeliveries;
+      },
+      createNewClient(name){
+        if (name !==  '') {
+          let newClient = {id: 0, phone_number: null, place_of_delivery_id: null, default_distance: null};
+          newClient.full_name = 'NOWY: '+name;
+          if (!this.newClientExist()){this.allClients.unshift({});}
+          //anyway create new client or update it on place 0 in allClients array
+          this.allClients.splice(0, 1, newClient);
+          this.choosenClient = newClient;
+        } else {
+          // if we dont named our client or choose one
+          this.choosenClient = null;
+        }
+      },
+      newClientExist(){return !((this.allClients.length > 0) && (this.allClients[0].id !== 0));},
     },
-    created() {this.lisen();},
   }
 </script>
