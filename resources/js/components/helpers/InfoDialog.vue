@@ -1,37 +1,17 @@
 <template>
   <div class="text-xs-center">
-    <v-dialog
-      v-model="dialog"
-      width="500"
-    >
+    <v-dialog v-model="dialog" width="500">
 
-      <template v-slot:activator="{ on }">
-        <v-btn icon v-on="on"><v-icon>info</v-icon></v-btn>
-      </template>
-
+      <template v-slot:activator="{ on }"><v-btn icon v-on="on"><v-icon>info</v-icon></v-btn></template>
       <v-card>
-        <v-card-title
-          class="headline grey lighten-2"
-          primary-title
-        >
-          Informacja
-        </v-card-title>
+        <v-toolbar color="info" dark dense>
+          <v-toolbar-title>Informacja</v-toolbar-title>
+        </v-toolbar>
 
-        <v-card-text>
-            {{message}}
-        </v-card-text>
-
-        <v-divider></v-divider>
+        <v-card-text><h4>{{message}}</h4></v-card-text>
 
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="primary"
-            flat
-            @click="dialog = false"
-          >
-            Ok
-          </v-btn>
+          <v-btn color="primary" block flat class="mt-0" @click="dialog = false">Ok</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f5d7c06-79b2-432a-bdd9-0dc59282bebb" name="Default Changelist" comment="">
+    <list default="true" id="5f5d7c06-79b2-432a-bdd9-0dc59282bebb" name="Default Changelist" comment="new task - validated all inputs, created counting order price, fixed counting percent and money exchange">
+      <change afterPath="$PROJECT_DIR$/resources/js/components/helpers/ErrorDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/PlaceOfDelivery.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/PlaceOfDelivery.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/NewOrders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/NewOrders.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/helpers/InfoDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/helpers/InfoDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/functions/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/functions/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,23 +46,16 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="mis_kalkulator_2019: schema" type="76f4a085:MysqlImplModel$Schema" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="mis_kalkulator_2019@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="mis_kalkulator_2019: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="clients: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/js/components/NewOrders.vue">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/helpers/InfoDialog.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="249" column="37" lean-forward="true" selection-start-line="249" selection-start-column="37" selection-end-line="249" selection-end-column="37" />
+            <state relative-caret-position="68">
+              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -75,36 +71,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>v-layo</find>
-      <find>editedItem</find>
-      <find>defaultItem</find>
-      <find>sendObject</find>
+      <find>console.</find>
+      <find>countGlassPa</find>
+      <find>width =</find>
+      <find>countSer</find>
+      <find>validatea</find>
+      <find>validateAsNumber</find>
+      <find>conf</find>
+      <find>wymiar</find>
+      <find>unitGlassPaneDimension</find>
+      <find>products</find>
+      <find>count</find>
+      <find>usm</find>
+      <find>countOr</find>
+      <find>changeTotalValueInPennyShow</find>
+      <find>this.countOrderPi</find>
+      <find>radio</find>
+      <find>console</find>
+      <find>c</find>
+      <find>deliver</find>
+      <find>delive</find>
+      <find>choosed</find>
+      <find>zatwi</find>
+      <find>tryToSaveOrder</find>
+      <find>informa</find>
+      <find>info-dia</find>
       <find>props</find>
-      <find>idnex</find>
-      <find>index</find>
+      <find>info</find>
       <find>lisen</find>
-      <find>area</find>
-      <find>res</find>
-      <find>console.log</find>
-      <find>menu1</find>
-      <find>place</find>
-      <find>Miejscowo</find>
-      <find>@ch</find>
-      <find>sort</find>
-      <find>distanceInKi</find>
-      <find>name</find>
-      <find>item-name</find>
-      <find>item-text</find>
-      <find>inputvalue</find>
-      <find>transportType</find>
-      <find>totalValueInPenny</find>
-      <find>totalValueInPennyShowed</find>
-      <find>fullname</find>
-      <find>phone</find>
-      <find>p</find>
-      <find>numer</find>
-      <find>choosenPhoneNumber</find>
-      <find>this.newClientExist</find>
+      <find>showErrorDialog</find>
+      <find>isOrderValid</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -113,7 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Http/Controllers/AdditionalServiceController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HolePriceController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/CutModelController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HoleController.php" />
@@ -140,14 +135,11 @@
         <option value="$PROJECT_DIR$/.editorconfig" />
         <option value="$PROJECT_DIR$/resources/sass/app.scss" />
         <option value="$PROJECT_DIR$/resources/views/newTask.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/helpers/InfoDialog.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/helpers/AddGlassPane.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/helpers/TestDialog.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/AllOrders.vue" />
         <option value="$PROJECT_DIR$/resources/js/app.js" />
         <option value="$PROJECT_DIR$/resources/views/allTasks.blade.php" />
-        <option value="$PROJECT_DIR$/resources/js/functions/helpers.js" />
         <option value="$PROJECT_DIR$/app/Material.php" />
         <option value="$PROJECT_DIR$/app/MaterialType.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/GlassPaneController.php" />
@@ -160,9 +152,13 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/app/GlassModel.php" />
         <option value="$PROJECT_DIR$/app/CutModel.php" />
-        <option value="$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue" />
         <option value="$PROJECT_DIR$/app/Client.php" />
         <option value="$PROJECT_DIR$/app/PlaceOfDelivery.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
+        <option value="$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue" />
+        <option value="$PROJECT_DIR$/resources/js/components/helpers/InfoDialog.vue" />
+        <option value="$PROJECT_DIR$/resources/js/functions/helpers.js" />
+        <option value="$PROJECT_DIR$/resources/js/components/helpers/ErrorDialog.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/NewOrders.vue" />
       </list>
     </option>
@@ -252,8 +248,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="167" />
-    <option name="y" value="73" />
+    <option name="x" value="-57" />
+    <option name="y" value="36" />
     <option name="width" value="1382" />
     <option name="height" value="754" />
   </component>
@@ -264,7 +260,46 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mis_kalkulator_2019" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mis_kalkulator_2019" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="helpers" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
@@ -279,6 +314,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Piotr\Desktop\Programowanie\MYPROJECTS\LARAVEL\mis_kalkulator_2019\resources\js\components\helpers" />
       <recent name="C:\Users\Piotr\Desktop\Programowanie\MYPROJECTS\LARAVEL\mis_kalkulator_2019\resources\js\components" />
       <recent name="C:\Users\Piotr\Desktop\Programowanie\MYPROJECTS\LARAVEL\mis_kalkulator_2019\resources\views" />
     </key>
@@ -323,7 +359,11 @@
       <workItem from="1556703873898" duration="16286000" />
       <workItem from="1556814426578" duration="13175000" />
       <workItem from="1556874513199" duration="11569000" />
-      <workItem from="1556965256104" duration="12029000" />
+      <workItem from="1556965256104" duration="31513000" />
+      <workItem from="1557004674747" duration="2276000" />
+      <workItem from="1557167557493" duration="8656000" />
+      <workItem from="1557248026610" duration="21656000" />
+      <workItem from="1557327466541" duration="14396000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1555769297195</created>
@@ -444,15 +484,21 @@
       <option name="project" value="LOCAL" />
       <updated>1556968793367</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="new task - creating dynamic adding new client">
+      <created>1556977490123</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1556977490145</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="216057000" />
+    <option name="totallyTimeSpent" value="282525000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.1954612" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -468,10 +514,10 @@
       <window_info anchor="bottom" id="Database Console" order="7" weight="0.32935917" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49926794" visible="true" weight="0.20417288" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49926794" weight="0.25782415" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50073206" side_tool="true" weight="0.20566319" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.29359165" />
-      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info active="true" anchor="bottom" id="Messages" order="13" visible="true" weight="0.32935917" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="14" weight="0.32935917" />
       <window_info anchor="bottom" id="TypeScript" order="15" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -526,30 +572,11 @@
     <MESSAGE value="new task - add product -&gt; working with price" />
     <MESSAGE value="new task - add product -&gt; finished counting price for glass pane" />
     <MESSAGE value="new task - finished adding new/ editing and deleting product" />
-    <option name="LAST_COMMIT_MESSAGE" value="new task - finished adding new/ editing and deleting product" />
+    <MESSAGE value="new task - creating dynamic adding new client" />
+    <MESSAGE value="new task - validated all inputs, created counting order price, fixed counting percent and money exchange" />
+    <option name="LAST_COMMIT_MESSAGE" value="new task - validated all inputs, created counting order price, fixed counting percent and money exchange" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_04_20_133452_create_glass_models_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="24" column="22" lean-forward="true" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/bootstrap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/ExampleComponent.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/NewFile.vue" />
     <entry file="file://$PROJECT_DIR$/resources/js/components/NewOrder.vue" />
     <entry file="file://$PROJECT_DIR$/.editorconfig">
@@ -577,13 +604,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -670,13 +690,6 @@
       </provider>
     </entry>
     <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/users">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/place_of_deliveries">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -770,13 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/configs">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/hole_prices">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -812,27 +818,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/helpers/InfoDialog.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Client.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="54" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="109" column="29" lean-forward="true" selection-start-line="109" selection-start-column="29" selection-end-line="109" selection-end-column="29" />
-          <folding>
-            <element signature="e#7#35#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -843,24 +832,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/functions/helpers.js">
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+        <state relative-caret-position="402">
+          <caret line="121" column="38" selection-start-line="121" selection-start-column="31" selection-end-line="121" selection-end-column="38" />
+          <folding>
+            <element signature="e#7#35#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue">
+    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/place_of_deliveries">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://d42a3181-f05e-4371-b0ad-dcc7832e7a2a/schema/mis_kalkulator_2019/table/configs">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bootstrap/app.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="11" column="16" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+        <state relative-caret-position="204">
+          <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/ExampleComponent.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/NewOrders.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="249" column="37" lean-forward="true" selection-start-line="249" selection-start-column="37" selection-end-line="249" selection-end-column="37" />
+        <state relative-caret-position="218">
+          <caret line="399" column="94" selection-start-line="399" selection-start-column="94" selection-end-line="399" selection-end-column="94" />
+          <folding>
+            <element signature="n#v-toolbar#0;n#v-flex#0;n#v-layout#0;n#template#0;n#!!top" />
+            <element signature="n#v-data-table#0;n#v-flex#1;n#v-layout#0;n#template#0;n#!!top" />
+            <element signature="n#template#0;n#v-data-table#0;n#v-flex#1;n#v-layout#0;n#template#0;n#!!top" />
+            <element signature="n#template#1;n#v-data-table#0;n#v-flex#1;n#v-layout#0;n#template#0;n#!!top" />
+            <element signature="n#template#2;n#v-data-table#0;n#v-flex#1;n#v-layout#0;n#template#0;n#!!top" />
+            <element signature="n#template#3;n#v-data-table#0;n#v-flex#1;n#v-layout#0;n#template#0;n#!!top" />
+            <element signature="n#div#0;n#v-flex#1;n#v-layout#0;n#template#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/helpers/GlassPaneDialog.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="78" column="25" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/helpers/ErrorDialog.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/functions/helpers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/helpers/InfoDialog.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
         </state>
       </provider>
     </entry>
