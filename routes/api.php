@@ -35,6 +35,7 @@ Route::group([
         Route::get('all', 'OrderController@all');
         Route::get('single/{id}', 'OrderController@single');
         Route::post('store', 'OrderController@store');
+        Route::post('validate', 'OrderController@validateOrder');
         Route::patch('update/{id}', 'OrderController@update');
         Route::delete('destroy/{id}', 'OrderController@destroy');
     });

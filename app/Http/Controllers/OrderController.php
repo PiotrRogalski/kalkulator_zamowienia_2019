@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequestValidation;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Order;
 
@@ -21,6 +22,10 @@ class OrderController extends Controller
             return response('CREATED', Response::HTTP_CREATED);
         }
         return response('Error - bad request', Response::HTTP_BAD_REQUEST);
+    }
+
+    public function validateOrder(Request $request) {
+        return response('OK', Response::HTTP_OK);
     }
 
     public function update(Order $id, OrderRequestValidation $request) {

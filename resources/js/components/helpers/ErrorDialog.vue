@@ -1,7 +1,7 @@
 <template>
   <div class="text-xs-center">
     <v-dialog v-model="dialog" width="500">
-      <template v-slot:activator="{ on }"><v-btn icon v-on="on"><v-icon>error</v-icon></v-btn></template>
+      <!--<template v-slot:activator="{ on }"><v-btn icon v-on="on"><v-icon>error</v-icon></v-btn></template>-->
       <v-card>
         <v-toolbar color="error" dark dense>
           <v-toolbar-title>Błąd!</v-toolbar-title>

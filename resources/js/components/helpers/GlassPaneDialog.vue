@@ -85,6 +85,8 @@
       Uzupełnij wysokość i szerokość tafli!
     </p>
   </v-card-text>
+  <v-btn icon flat @click="getVars"><v-icon>close</v-icon> sprzawdz zmienne</v-btn>
+
   <v-card-actions v-if="(glassPaneWidth*1 === 0 || glassPaneHeight*1 === 0)">
     <v-btn block color="amber darken-4" flat dark @click="closeDialog">Anuluj</v-btn>
   </v-card-actions>
@@ -128,6 +130,12 @@
         EventBus.$on('openAddGlassPaneDialog', () => {this.isDialogOpen = true;});
         EventBus.$on('closeAddGlassPaneDialog', () => {this.resetVariables(); this.isDialogOpen = false;});
         EventBus.$on('openToEditGlassPaneDialog', (obj) => {this.assignGlassPaneObjectToEditing(obj);});
+      },
+      getVars(){
+        console.log(this.glassModels);
+        console.log(this.glassMarks);
+        console.log(this.materialTypes);
+        console.log(this.materials);
       },
       closeDialog(){EventBus.$emit('closeAddGlassPaneDialog');},
       saveDialog(){this.emitGlassPaneObj(); this.closeDialog();},
@@ -242,7 +250,7 @@
 
         glassModelIds = this.getChoosedGlassModel(['id']);
 
-        if (glassModelIds.length > 0) {
+        if (typeof glassModelIds === 'array' && glassModelIds.length > 0) {
           this.choosenGlassModelId = nd2.validNumber(glassModelIds[0].id);
           this.changeCutModelsList();
           this.changeTotalValueInPenny();
@@ -261,7 +269,7 @@
           return (materialOK && materialTypeOK && glassMarkOK);
         }).map(function(obj) {return {name: obj.glass_mark}});
 
-        if (this.glassMarks.length > 0) {
+        if (typeof this.glassMarks === 'array' && this.glassMarks.length > 0) {
           this.choosenGlassMarksName = this.glassMarks[0].name;
         } else {this.choosenGlassMarksName = null;}
       },
@@ -542,36 +550,57 @@
       },
       emitGlassPaneObj() {
         let glassPaneObj = {};
+
         glassPaneObj.glass_model_id = this.choosenGlassModelId;
-        if (nd2.validNumber(this.choosenGlassModelName) === 0 || nd2.validNumber(this.choosenGlassModelId) === -1) {
-          glassPaneObj.glass_model_name = 'Brak';
-        } else {
-          glassPaneObj.glass_model_name = this.choosenGlassModelName;
-        }
+
+        if (nd2.validNumber(this.choosenGlassModelName) === 0 ||
+            nd2.validNumber(this.choosenGlassModelId) === -1) { glassPaneObj.glass_model_name = 'Brak'; }
+        else { glassPaneObj.glass_model_name = this.choosenGlassModelName; }
+
+        if (nd2.validNumber(this.choosenCutModelName) === 0 ||
+            nd2.validNumber(this.choosenCutModelId) === -1) { glassPaneObj.cut_model_name = 'Brak'; }
+        else { glassPaneObj.cut_model_name = this.choosenCutModelName; }
+
+        if (nd2.validNumber(this.glassPaneQuantity) > 0) { glassPaneObj.quantity = nd2.validNumber(this.glassPaneQuantity); }
+        else { glassPaneObj.quantity = 1; }
+
+        let glassModel = this.getChoosedGlassModel([ 'glass_mark', 'id', 'material_id', 'material_type_id', 'name', 'price', 'thickness', 'unit']);
+        let cutModel = this.getChoosedCutModel([ 'id', 'name', 'material_id', 'material_type_id', 'thickness_from', 'thickness_to', 'unit', 'price']);
+
+        glassPaneObj.glass_model = glassModel[0];
+        glassPaneObj.cut_model = cutModel[0];
+
         glassPaneObj.width = nd2.validNumber(this.glassPaneWidth);
         glassPaneObj.height = nd2.validNumber(this.glassPaneHeight);
         glassPaneObj.cut_model_id = nd2.validNumber(this.choosenCutModelId);
-        if (nd2.validNumber(this.choosenCutModelName) === 0 || nd2.validNumber(this.choosenCutModelId) === -1) {
-          glassPaneObj.cut_model_name = 'Brak';
-        } else {
-          glassPaneObj.cut_model_name = this.choosenCutModelName;
-        }
-        if (nd2.validNumber(this.glassPaneQuantity) > 0) {glassPaneObj.quantity = nd2.validNumber(this.glassPaneQuantity);}
-        else {glassPaneObj.quantity = 1;}
         glassPaneObj.price = nd2.validNumber(this.totalValueInPenny);
-
-        //TODO  - zamienic puste stringi na (number) 1
         glassPaneObj.holes = this.cutValuesFromArray(this.holes, ['diameter']);
         glassPaneObj.services = this.cutValuesFromArray(this.services, ['service_list_id']);
-        glassPaneObj.additionalServices = this.changeValueInArray(this.additionalServices, ['price'], 0);
+        glassPaneObj.additional_services = this.changeValueInArray(this.additionalServices, ['price'], 0);
         glassPaneObj.unitGlassPaneDimension = this.unitGlassDimension;
         glassPaneObj.index = this.index;
 
         // console.log(glassPaneObj);
-
         EventBus.$emit('addGlassPaneToProductsList', glassPaneObj);
       },
       assignGlassPaneObjectToEditing(obj) {
+        // isDialogOpen: false,
+        //   materials: [], materialTypes: [], thickness: [], cutModels: [], glassModels: [], glassMarks: [],
+        //   holes: [], additionalServices: [], services: [],
+        //   totalValueInPennyShowed: '0 zł', totalValueInPenny: 0, index: -1,
+        //   glassPaneQuantity: 0, glassPaneWidth: 0, glassPaneHeight: 0, areaInSquareMeters: '0 m2',
+        //   choosenMaterialId: 1, choosenMaterialTypeId: -1, choosenThicknessName: null, choosenGlassMarksName: null,
+        //   choosenGlassModelId: -1, choosenGlassModelName: null, choosenCutModelId: -1,
+        //   choosenCutModelId: -1,
+        //   allMaterialTypes: [], allCutModels: [], holePrices: [], servicesList: [],
+        //   unitGlassDimension: 'cm',
+
+        //   choosenMaterialId: 1, choosenMaterialTypeId: -1, choosenThicknessName: null, choosenGlassMarksName: null,
+        // choosenGlassModelId: -1
+        console.log(obj);
+        this.choosenMaterialId = obj.glass_model.material_id;
+        this.choosenMaterialTypeId = obj.glass_model.material_type_id;
+
         this.holes = obj.holes;
         this.additionalServices = obj.additionalServices;
         this.services = obj.services;

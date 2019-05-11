@@ -88,6 +88,13 @@ class nd2 {
     }
     if (resultErrors.length > 0) {console.log(resultErrors);} else {console.log('validNumber() - test ok');}
   }
+  length(array) {
+    let result = 0;
+    if (typeof array === 'array' || typeof array === 'string') {
+      result = array.length;
+    }
+    return result;
+  }
   showErrorDialog(err) {EventBus.$emit('showErrorDialog', err);}
 
 }
